@@ -52,15 +52,29 @@ public class ReadNumber {
             case 15:
                 System.out.println("fifteen");
                 break;
+            case 16:
+                System.out.println("sixteen");
+                break;
+            case 17:
+                System.out.println("seventeen");
+                break;
+            case 18:
+                System.out.println("eighteen");
+                break;
+            case 19:
+                System.out.println("nineteen");
+                break;
+
             default:
-                String [] a = {"", "one", "two", "thir", "four", "five", "six", "seven", "eight", "nine"};
-                if(num > 15 && num < 100)
+                String [] a = {"", "", "twen", "thir", "four", "fif", "six", "seven", "eight", "nine"};
+                String [] b = {"", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine"};
+                if(num < 100)
                 {
-                    res = res + a[num / 10] + "ty" + " " + a[num % 10];
+                    res = res + a[num / 10] + "ty" + " " + b[num % 10];
                 }
                 else
                 {
-                    res = res + a[num / 100] + " hundred " + a[(num % 100)/10] + "ty " + a[num % 10];
+                    res = res + b[num / 100] + " hundred " + a[(num % 100)/10] + "ty " + b[num % 10];
                 }
                 break;
         }
