@@ -17,6 +17,9 @@ public class MyLinkedListTest {
         System.out.println(a.get(3));
         System.out.println(a.getFirst());
         System.out.println(a.getLast());
+        Object c = 2;
+        if(c instanceof Integer) System.out.println("yes");
+
 
     }
 }
