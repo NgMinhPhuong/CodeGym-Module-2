@@ -1,7 +1,7 @@
 package Nganxep;
 public class MyQueue {
-     class Node{
-          int value;
+     private class Node{
+         private int value;
          private Node next;
          private Node(int value){
          this.value=value;
@@ -62,7 +62,7 @@ public class MyQueue {
         MyQueue a = new MyQueue();
         a.push(5);
         a.push(6);
-        System.out.println(a.topNode.value);
+        System.out.println(a.tailNode.value);
     }
 
 }
