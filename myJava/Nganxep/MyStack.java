@@ -48,8 +48,11 @@ public class MyStack {
         }
     }
     public static void main(String[] args) {
-        
-      
+
+        MyQueue a = new MyQueue();
+        a.push(5);
+        a.push(6);
+        System.out.println(a.topNode.value);
      
     }
 
