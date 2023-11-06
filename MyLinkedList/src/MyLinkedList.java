@@ -15,11 +15,11 @@ public class MyLinkedList <E> {
         }
     }
 
-    MyLinkedList() {
+    MyLinkedList() { //---------
 
     }
 
-    public void addFirst(E e) {
+    public void addFirst(E e) { //----------
         Node tmp = new Node(e);
         if (numNodes == 0) {
             head = tmp;
@@ -31,7 +31,7 @@ public class MyLinkedList <E> {
         }
     }
 
-    public void addLast(E e) {
+    public void addLast(E e) { //----------
         Node tmp = new Node(e);
         if (numNodes == 0) {
             head = tmp;
@@ -46,7 +46,7 @@ public class MyLinkedList <E> {
         }
     }
 
-    public void show() {
+    public void show() { //---------
         Node run = head;
         while (run != null) {
             System.out.print(run.data + " ");
@@ -55,7 +55,7 @@ public class MyLinkedList <E> {
         System.out.println();
     }
 
-    public void add(int index, E element) {
+    public void add(int index, E element) {//----------
         Node tmp = new Node(element);
         if (index >= 0 && index <= numNodes) {
             if (index == 0) addFirst(element);
@@ -73,7 +73,7 @@ public class MyLinkedList <E> {
         }
     }
 
-    public E remove(int index) {
+    public E remove(int index) { //------------
         E ret;
         if (index >= 0 && index < numNodes) {
             if (index == 0) {
@@ -104,12 +104,12 @@ public class MyLinkedList <E> {
         }
         return null;
     }
-    public boolean remove(Object e){
+    public boolean remove(Object e){ //-----------
         if(numNodes == 0) return false;
         Node run = head;
         int size = numNodes;
         int indexDel = 0;
-        for(int i = 0; i < size - 1 ; i++){
+        for(int i = 0; i < size  ; i++){
             if((E) run.data == (E) e){
                     run = run.next;
                 remove(indexDel);
@@ -123,11 +123,11 @@ public class MyLinkedList <E> {
         return true;
     }
 
-    public int size(){
+    public int size(){ //----------
         return this.numNodes;
     }
 
-    public MyLinkedList<E> clone(){
+    public MyLinkedList<E> clone(){ //-----------
         MyLinkedList<E> a = new MyLinkedList<>();
         if(this.numNodes > 0) {
 
@@ -147,4 +147,58 @@ public class MyLinkedList <E> {
         }
         return a;
     }
+
+    public boolean contains(E o){ //-------
+        Node run = head;
+        while(run != null){
+            if((E)run.data == o){
+                return true;
+            }
+            run = run.next;
+        }
+        return false;
+    }
+    public int indexOf(E o){ //-----
+        int i = 0;
+        Node run = head;
+        while(run != null){
+            if((E) run.data == o){
+                return i;
+            }
+            run = run.next;
+            i++;
+        }
+        return -1;
+    }
+
+    public E get(int index){
+        if(numNodes > 0 && index >= 0 && index < numNodes) {
+            Node run = head;
+            for (int i = 0; i < index; i++) {
+                run = run.next;
+            }
+            return (E) run.data;
+        }
+        return  null;
+    }
+
+    public E getFirst(){
+        if(numNodes > 0){
+            return (E) head.data;
+        }
+        return null;
+    }
+
+    public E getLast(){
+        if(numNodes > 0){
+            Node run = head;
+            while(run.next != null){
+                run = run.next;
+            }
+            return (E) run.data;
+        }
+        return null;
+    }
+
+
 }
