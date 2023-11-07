@@ -1,11 +1,14 @@
 package Nganxep;
 public class MyQueue {
-     private class Node{
-         private int value;
+      class Node{
+          private int value;
          private Node next;
          private Node(int value){
          this.value=value;
          
+        }
+        private int getValue(){
+             return value;
         }
          
     }
@@ -59,10 +62,8 @@ public class MyQueue {
     }
 
     public static void main(String[] args) {
-        MyQueue a = new MyQueue();
-        a.push(5);
-        a.push(6);
-        System.out.println(a.tailNode.value);
+        MyQueue a= new MyQueue();
+        
     }
 
 }
