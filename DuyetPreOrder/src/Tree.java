@@ -72,15 +72,34 @@ public class Tree<E extends Comparable<E>> {
         }
         return false;
     }
+
+    void preorderLeftToRight(TreeNode<E> root){
+        if(root == null){
+            return;
+        }
+        System.out.print(root.e + " ");
+        preorderLeftToRight(root.left);
+        preorderLeftToRight(root.right);
+
+    }
+
+    void preorderRightToLeft(TreeNode<E> root){
+        if(root == null){
+            return;
+        }
+        System.out.print(root.e + " ");
+        preorderRightToLeft(root.right);
+        preorderRightToLeft(root.left);
+    }
     public static void main(String[] args) {
         Tree<Integer> tree = new Tree<>();
         int [] a = {3,1,4,0,2,6};
         for(int x : a)
             tree.insert(x);
         System.out.println();
-        tree.display(tree.root);
-        tree.remove(1);
+        tree.preorderLeftToRight(tree.root);
+
         System.out.println();
-        tree.display(tree.root);
+        tree.preorderRightToLeft(tree.root);
     }
 }
