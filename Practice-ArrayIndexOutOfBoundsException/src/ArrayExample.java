@@ -23,7 +23,7 @@ public class ArrayExample {
             System.out.println("Giá trị của phần tử có chỉ số 5" + x + " là " + arr[x]);
         } catch (IndexOutOfBoundsException e) {
             System.err.println("Chỉ số vượt quá giới hạn của mảng");
-           
+
         }
     }
 }
