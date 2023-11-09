@@ -1,17 +1,24 @@
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.Scanner;
 
 class Main {
-    static void sum(int a, int b){
-        System.out.println("heare");
-        int c = a /b;
-
+    public static void someMethod() {
+        try{
+            if(2 < 3){
+                throw new FileNotFoundException();
+            }
+        } catch (Exception e){
+            System.out.println("cc");
+        }
     }
 
-    public static void main(String[] args) {
-        int a = 0;
-        System.out.println(a++);
-        System.out.println(a++);
-        System.out.println(a++);
-        System.out.println(a++);
+    public static void main(String[] args) throws IOException {
+        someMethod();
+
     }
 }
