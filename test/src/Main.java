@@ -13,7 +13,7 @@ class Main {
                 throw new FileNotFoundException();
             }
         } catch (Exception e){
-            System.out.println("cc");
+            System.err.println("cc");
         }
     }
 
