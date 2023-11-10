@@ -14,9 +14,11 @@ public class ReadFile {
             {
                 res += line + ",";
             }
+            br.close();
         } catch (IOException e){
             e.printStackTrace();
         }
+
         String [] s = res.split(",");
         int cnt = 0;
         for(String x : s)
