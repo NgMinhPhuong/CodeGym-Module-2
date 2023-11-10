@@ -52,6 +52,6 @@ public class Manager {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        System.out.println(manager.containsByName("phú bcs"));
+        System.out.println(manager.containsByName("Hào"));
     }
 }
