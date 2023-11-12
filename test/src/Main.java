@@ -1,29 +1,20 @@
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 class Main{
 
     public static void main(String[] args) {
-        Thread one = new Thread(() -> {
 
-           for(int i = 0; i < 5; i++){
-               System.out.println("Task One: " + i);
-               try {
-                   Thread.sleep(2000);
-               } catch (InterruptedException e) {
-                   throw new RuntimeException(e);
-               }
-           }
-        });
-
-        Thread two = new Thread(() -> {
-           for(int i = 0; i < 5; i++){
-               System.out.println("Task Two: " + i);
-               try {
-                   Thread.sleep(1000);
-               } catch (InterruptedException e) {
-                   throw new RuntimeException(e);
-               }
-           }
-        });
-        one.start();
-        two.start();
+        String s = "1-2-2000";
+        String s1 = "22/2/2000";
+        String s2 = "abcdef";
+        String pattern = "\\d{1,2}[/-]\\d{1,2}[/-]\\d{4}";
+        Pattern pattern1 = Pattern.compile(pattern);
+        Matcher matcher = pattern1.matcher(s2);
+        System.out.println(matcher.matches());
+        System.out.println(s.matches(pattern));
+        System.out.println(s1.matches(pattern));
+        System.out.println(s2.matches(pattern));
+        System.out.println(s2.replace("a", "aaa"));
     }
 }
