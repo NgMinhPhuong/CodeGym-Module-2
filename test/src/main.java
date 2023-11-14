@@ -1,13 +1,18 @@
-public class main {
+public class main implements Runnable{
+    @Override
+    public synchronized void run(){
+
+    }
+    static synchronized String in() throws Exception {
+        throw  new Exception();
+    }
     public static void main(String[] args) {
-        testcon a = new testcon();
-        testcha b = (testcha) a;
-        testcha c = new testcon1();
-
-        Object ob = new Object();
-        ob.class.getDecl
-
-
-
+        try {
+            in();
+            System.out.println(123);
+        } catch (Exception e){
+            System.out.println("lỗi");
+        }
+        System.out.println("out");
     }
 }
