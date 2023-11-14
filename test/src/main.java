@@ -1,3 +1,5 @@
+import java.util.concurrent.atomic.AtomicInteger;
+
 public class main implements Runnable{
     @Override
     public synchronized void run(){
@@ -7,12 +9,8 @@ public class main implements Runnable{
         throw  new Exception();
     }
     public static void main(String[] args) {
-        try {
-            in();
-            System.out.println(123);
-        } catch (Exception e){
-            System.out.println("lỗi");
-        }
-        System.out.println("out");
+        AtomicInteger a = new AtomicInteger(6);
+        a.set(2);
+        System.out.println(a.get());
     }
 }
