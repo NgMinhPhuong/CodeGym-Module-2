@@ -19,13 +19,13 @@ public class CrawlSongExample {
             scanner.close();
             System.out.println(content);
             // remove all new line
-//            content = content.replaceAll("\\n+", "");
+            content = content.replaceAll("\\n+", "");
             // regex
-//            Pattern p = Pattern.compile("name_song\">(.*?)</a>");
-//            Matcher m = p.matcher(content);
-//            while (m.find()) {
-//                System.out.println(m.group(1));
-//            }
+            Pattern p = Pattern.compile("name_song\">(.*?)</a>");
+            Matcher m = p.matcher(content);
+            while (m.find()) {
+                System.out.println(m.group(1));
+            }
         } catch (IOException e) {
             System.out.println(e.getMessage());
             System.out.println(e.getCause());
