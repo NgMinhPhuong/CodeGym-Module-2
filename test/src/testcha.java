@@ -1,7 +1,7 @@
 public class testcha {
-    private int datacon;
-    void in(){
-        System.out.println("cha");
+    public static int cnt = 0;
+    testcha(){
+        cnt++;
     }
     public String toString(){
         return "string";
