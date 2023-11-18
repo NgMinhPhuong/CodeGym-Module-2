@@ -1,3 +1,6 @@
+package build;
+
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -24,7 +27,7 @@ public class Admin {
 
     void writeData(){
         try{
-            oos = new ObjectOutputStream(new FileOutputStream("C:\\Users\\DELL\\Desktop\\Java_CODEGYM-Module2\\case-study\\src\\ProductData.csv"));
+            oos = new ObjectOutputStream(new FileOutputStream("C:\\Users\\DELL\\Desktop\\Java_CODEGYM-Module2\\case-study\\src\\my_File\\ProductData.csv"));
             oos.writeObject(myProductList);
             oos.close();
         } catch(Exception e){
@@ -32,18 +35,13 @@ public class Admin {
         }
     }
     void readData(){
-        try{
-            ois = new ObjectInputStream(new FileInputStream("C:\\Users\\DELL\\Desktop\\Java_CODEGYM-Module2\\case-study\\src\\ProductData.csv"));
-            myProductList = (List<Product>) ois.readObject();
-        } catch (IOException e) {
-
-        } catch (ClassNotFoundException e) {
-            throw new RuntimeException(e);
-        } finally {
-            try{
-                System.out.println("here");
+        File file = new File("C:\\Users\\DELL\\Desktop\\Java_CODEGYM-Module2\\case-study\\src\\my_File\\ProductData.csv");
+        if(file.length() != 0) {
+            try {
+                ois = new ObjectInputStream(new FileInputStream("C:\\Users\\DELL\\Desktop\\Java_CODEGYM-Module2\\case-study\\src\\my_File\\ProductData.csv"));
+                myProductList = (List<Product>) ois.readObject();
                 ois.close();
-            } catch (IOException ex) {
+            } catch (IOException | ClassNotFoundException e) {
                 System.out.println("lỗi");
             }
         }

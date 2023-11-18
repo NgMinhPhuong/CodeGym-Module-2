@@ -1,3 +1,5 @@
+package build;
+
 public class AddByBank implements AddMoneyMethod {
 
     @Override

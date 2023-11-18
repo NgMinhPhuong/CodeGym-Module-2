@@ -1,3 +1,5 @@
+package Main;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,8 +14,8 @@ public class test1 {
         List<test1> l = new ArrayList<>();
         l.add(new test1(3));
         l.add(new test1(50));
-        test1 c = l.get(0);
-        c.data = 20;
+        test1 c = null;
+        c.data = 2;
         for(test1 x : l) System.out.println(x.data);
     }
 }

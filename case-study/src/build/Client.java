@@ -1,3 +1,5 @@
+package build;
+
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -9,11 +11,15 @@ public class Client {
     AddMoneyMethod addMoneyMethod;
     PaymentMethod paymentMethod;
     double account = 0;
-    String name;
+    String userName;
     double bankCard = 1000000;
+    String accountName;
+    String password;
     List<Product> basket = new ArrayList<>();
-    Client(String name){
-        this.name = name;
+    Client(String userName, String accountName, String password){
+        this.userName = userName;
+        this.accountName = accountName;
+        this.password = password;
     }
 
     void addIntoBasket(Product product){
@@ -52,14 +58,13 @@ public class Client {
             return;
         }
         paymentMethod.pay(this, product, amount);
-
     }
     void showBasket(){
         for(Product x : basket) System.out.println(x);
         System.out.println();
     }
     void connectToAdmin(Admin admin){
-        String path = "C:\\Users\\DELL\\Desktop\\Java_CODEGYM-Module2\\case-study\\src\\" + "MailBox" + this.name
+        String path = "C:\\Users\\DELL\\Desktop\\Java_CODEGYM-Module2\\case-study\\src\\my_File" + "MailBox" + this.userName
                 + "_And_" + admin.name + "txt";
         File file = new File(path);
         try{
@@ -68,11 +73,13 @@ public class Client {
             throw new RuntimeException(e);
         }
     }
-    void sendMessageTo(Admin admin){
-        String path = "C:\\Users\\DELL\\Desktop\\Java_CODEGYM-Module2\\case-study\\src\\" + "MailBox" + this.name
+    void sendMessageTo(Admin admin, String message){
+        String path = "C:\\Users\\DELL\\Desktop\\Java_CODEGYM-Module2\\case-study\\src\\my_File" + "MailBox" + this.userName
                 + "_And_" + admin.name + "txt";
         File file = new File(path);
         if(file.exists()){
+
+        }else{
 
         }
     }

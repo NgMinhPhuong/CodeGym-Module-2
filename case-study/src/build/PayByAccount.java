@@ -1,3 +1,5 @@
+package build;
+
 public class PayByAccount implements PaymentMethod {
 
 

@@ -1,3 +1,5 @@
+package build;
+
 public class AddByPhoneCard implements AddMoneyMethod {
     @Override
     public AddMoneyMethod add() {

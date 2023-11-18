@@ -1,4 +1,6 @@
-public class PayByCard implements PaymentMethod{
+package build;
+
+public class PayByCard implements PaymentMethod {
 
     @Override
     public void pay(Client client, Product product, int amount) {
