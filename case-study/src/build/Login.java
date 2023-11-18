@@ -6,26 +6,33 @@ import java.io.ObjectInputStream;
 
 public class Login {
     ObjectInputStream ois;
-    Login(){
+    public Login(){
 
     }
-    Client login(String accountName, String password){
+    public User login(String accountName, String password){
         try(ObjectInputStream ois = new ObjectInputStream(new FileInputStream("C:\\Users\\DELL\\Desktop\\Java_CODEGYM-Module2\\case-study\\src\\my_File\\AccountList.csv"));)
         {
-            Client client = null;
-            while((client = (Client) ois.readObject()) != null) {
-                if(client.accountName.equals(accountName) && client.password.equals(password)){
-                    return client;
+           User user = null;
+            while((user = (User) ois.readObject()) != null) {
+                if(user.accountName.equals(accountName) && user.password.equals(password)){
+                    if (user instanceof Client) {
+                        System.out.println("Login successfully. Welcome My Client " + user.userName);
+                        System.out.println("--------------------");
+                        ois.close();
+                        return user;
+                    } else{
+                        System.out.println("Login successfully. Welcome Admin: " + user.userName);
+                        System.out.println("--------------------");
+                        ois.close();
+                        return user;
+                    }
                 }
             }
         } catch (IOException | ClassNotFoundException e) {
-            throw new RuntimeException(e);
+            e.printStackTrace();
         }
-        System.out.println("Wrong Account or Password. Please Enter Again");
+        System.out.println("Wrong Account or Password. Please Enter Again!");
+        System.out.println("--------------------");
         return null;
-    }
-
-    public static void main(String[] args) {
-        System.out.println("dsa");
     }
 }

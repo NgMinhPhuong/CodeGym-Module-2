@@ -12,11 +12,13 @@ public class RegisterAccount {
 
     }
 
-    void resigter(String userName, String accountName, String password) {
+    public void resigter(String userName, String accountName, String password) {
         try{
             oos = new ObjectOutputStream(new FileOutputStream("C:\\Users\\DELL\\Desktop\\Java_CODEGYM-Module2\\case-study\\src\\my_File\\AccountList.csv", true));
-            oos.writeObject(new Client(userName, accountName, password));
+            User user = new Client(userName, accountName, password);
+            oos.writeObject(user);
             oos.close();
+            System.out.println("Resigter successfully");
         } catch(Exception e){
             System.out.println("Error Write File AccountList.txt");
         }

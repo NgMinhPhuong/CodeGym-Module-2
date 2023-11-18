@@ -6,23 +6,24 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Admin {
+public class Admin extends User implements Serializable {
 
-    String name;
     private static double revenue = 0;
     private static List<Product> myProductList;
     ObjectOutputStream oos;
     ObjectInputStream ois;
     Admin(){
+        super("","","");
         myProductList = new ArrayList<>();
     }
 
-    Admin(String name){
+    Admin(String userName, String accountName, String password){
+        super(userName, accountName, password);
         myProductList = new ArrayList<>();
-        this.name = name;
     }
 
     void writeData(){
