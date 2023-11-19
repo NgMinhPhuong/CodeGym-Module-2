@@ -1,5 +1,4 @@
 package build;
-
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -9,6 +8,7 @@ public abstract class User implements Serializable {
     String userName;
     String accountName;
     String password;
+
 
     public User(String userName, String accountName, String password) {
         this.userName = userName;

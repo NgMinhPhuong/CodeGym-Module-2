@@ -14,18 +14,7 @@ import java.util.Scanner;
 public class test {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        try (RandomAccessFile file = new RandomAccessFile("C:\\Users\\DELL\\Desktop\\Java_CODEGYM-Module2\\case-study\\src\\my_File\\ProductData.csv", "rw")) {
-            file.setLength(0); // Đặt độ dài file là 0
-            //System.out.println("Đã xóa hết nội dung trong file nhị phân.");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        try (RandomAccessFile file = new RandomAccessFile("C:\\Users\\DELL\\Desktop\\Java_CODEGYM-Module2\\case-study\\src\\my_File\\AccountList.csv", "rw")) {
-            file.setLength(0); // Đặt độ dài file là 0
-            //System.out.println("Đã xóa hết nội dung trong file nhị phân.");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+
        Client another = null;
         String accountName;
         String password;

@@ -6,6 +6,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.io.RandomAccessFile;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -62,4 +63,28 @@ public class RegisterAccount {
         accountList.add(newUser);
         writeData();
     }
+
+    private static void resigterAdAccount(String userName, String accountName, String password){
+        readData();
+        User user = new Admin(userName, accountName, password);
+        accountList.add(user);
+        writeData();
+    }
+
+    public static void main(String[] args) {
+        try (RandomAccessFile file = new RandomAccessFile("C:\\Users\\DELL\\Desktop\\Java_CODEGYM-Module2\\case-study\\src\\my_File\\ProductData.csv", "rw")) {
+            file.setLength(0); // Đặt độ dài file là 0
+            //System.out.println("Đã xóa hết nội dung trong file nhị phân.");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        try (RandomAccessFile file = new RandomAccessFile("C:\\Users\\DELL\\Desktop\\Java_CODEGYM-Module2\\case-study\\src\\my_File\\AccountList.csv", "rw")) {
+            file.setLength(0); // Đặt độ dài file là 0
+            //System.out.println("Đã xóa hết nội dung trong file nhị phân.");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        resigterAdAccount("Admin","admin","admin");;
+    }
+
 }

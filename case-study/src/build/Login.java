@@ -13,8 +13,6 @@ public class Login {
 
     }
 
-
-
     public User login(String accountName, String password){
                 RegisterAccount.readData();
                 accountList = RegisterAccount.accountList;
@@ -22,17 +20,14 @@ public class Login {
                     if ((user.accountName).equals(accountName) && (user.password).equals(password)) {
                         if (user instanceof Client) {
                             System.out.println("Login successfully. Welcome My Client " + user.userName);
-                            System.out.println("--------------------");
                             return user;
                         } else {
                             System.out.println("Login successfully. Welcome Admin: " + user.userName);
-                            System.out.println("--------------------");
                             return user;
                         }
                     }
                 }
         System.out.println("Wrong Account or Password. Please Enter Again!");
-        System.out.println("--------------------");
         return null;
     }
 }
