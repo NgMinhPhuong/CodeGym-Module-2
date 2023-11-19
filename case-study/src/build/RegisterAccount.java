@@ -84,7 +84,8 @@ public class RegisterAccount {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        resigterAdAccount("Admin","admin","admin");;
+        resigterAdAccount("Admin","admin","admin");
+        resigterAdAccount("Admin","admin1","admin1");
     }
 
 }

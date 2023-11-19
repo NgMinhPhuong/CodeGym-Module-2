@@ -59,18 +59,24 @@ public class test {
                             System.out.println("4. Connect To Another User");
                             System.out.println("5. Send A Message");
                             System.out.println("6. Log out");
+                            System.out.print("Enter your choose: ");
                             choose1 = sc.nextInt();
-
+                            sc.nextLine();
                             switch (choose1){
-
                                 case 4:
-                                    another = (Client) (new Login().login("phuong1234","123456"));
-                                    client.connectToAnUser(another);
+                                    System.out.print("You want to connect to Account: ");
+                                    accountName = sc.nextLine();
+                                    client.connectToAnUser(accountName);
                                     break;
                                 case 5:
-                                    client.sendMessageTo(another, "hi mày nhé");
+                                    System.out.print("Send to Account: ");
+                                    accountName = sc.nextLine();
+                                    System.out.print("Conten is: ");
+                                    String content = sc.nextLine();
+                                    client.sendMessageTo(accountName, content);
                                     break;
                             }
+                            System.out.println("------------------------------------------------------------");
                         }
                     }else {
                         while(choose1 != 6)
@@ -80,8 +86,8 @@ public class test {
                             System.out.println("3. Buy Product");
                             System.out.println();
                             choose1 = sc.nextInt();
+                            System.out.println("------------------------------------------------------------");
                         }
-
                     }
                     break;
             }
