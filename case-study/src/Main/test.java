@@ -20,7 +20,13 @@ public class test {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        Client another = (Client) (new Login().login("phuong123","123456"));
+        try (RandomAccessFile file = new RandomAccessFile("C:\\Users\\DELL\\Desktop\\Java_CODEGYM-Module2\\case-study\\src\\my_File\\AccountList.csv", "rw")) {
+            file.setLength(0); // Đặt độ dài file là 0
+            //System.out.println("Đã xóa hết nội dung trong file nhị phân.");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+       Client another = null;
         String accountName;
         String password;
         String userName;
@@ -42,7 +48,6 @@ public class test {
                     System.out.print("User Name is: ");
                     userName = sc.nextLine();
                     registerAccount.resigter(userName, accountName, password);
-
                     System.out.println("------------------------------------------------------------");
                     break;
                 case 2:
@@ -52,6 +57,7 @@ public class test {
                     password = sc.nextLine();
                     Login login = new Login();
                     User user = login.login(accountName, password);
+                    System.out.println("------------------------------------------------------------");
                     if(user == null) continue;
                     int choose1 = 0;
                     if (user instanceof Client) {
@@ -63,16 +69,20 @@ public class test {
                             System.out.println("3. Buy Product");
                             System.out.println("4. Connect To Another User");
                             System.out.println("5. Send A Message");
+                            System.out.println("6. Log out");
                             choose1 = sc.nextInt();
+
                             switch (choose1){
+
                                 case 4:
+                                    another = (Client) (new Login().login("phuong1234","123456"));
                                     client.connectToAnUser(another);
                                     break;
                                 case 5:
                                     client.sendMessageTo(another, "hi mày nhé");
+                                    break;
                             }
                         }
-
                     }else {
                         while(choose1 != 6)
                         {

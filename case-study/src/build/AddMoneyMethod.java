@@ -1,5 +1,5 @@
 package build;
 
 public interface AddMoneyMethod {
-    AddMoneyMethod add();
+    void add(Client client, double monney);
 }

@@ -3,7 +3,8 @@ package build;
 public class AddByBank implements AddMoneyMethod {
 
     @Override
-    public AddMoneyMethod add() {
-        return new AddByBank();
+    public void add(Client client, double monney) {
+        client.bankCard -= monney;
+        client.account += monney;
     }
 }

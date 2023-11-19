@@ -43,7 +43,7 @@ public class Admin extends User implements Serializable {
                 myProductList = (List<Product>) ois.readObject();
                 ois.close();
             } catch (IOException | ClassNotFoundException e) {
-                System.out.println("lỗi");
+                System.out.println("Error Read ProductData.csv");
             }
         }
 

@@ -32,15 +32,8 @@ public class Client extends User implements Serializable {
     public void addMonneyToAccount(double monney){
         if(addMoneyMethod == null){
             System.out.println("Chose Add Method Please");
-
         } else{
-            if(addMoneyMethod.add() instanceof AddByPhoneCard){
-                System.out.println("Add With PhoneCard");
-                this.account += monney;
-            } else{
-                this.bankCard -= monney;
-                this.account += monney;
-            }
+            addMoneyMethod.add(this, monney);
         }
     }
 
