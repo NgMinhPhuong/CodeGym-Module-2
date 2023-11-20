@@ -32,6 +32,15 @@ public class RegisterAccount {
             System.out.println("Error Write File AccountList.txt");
         }
     }
+    public static void writeData1(){
+        try{
+            oos = new ObjectOutputStream(new FileOutputStream("C:\\Users\\DELL\\Desktop\\Java_CODEGYM-Module2\\case-study\\src\\my_File\\AccountList.csv"));
+            oos.writeObject(accountList);
+            oos.close();
+        } catch(Exception e){
+            System.out.println("Error Write File AccountList.txt");
+        }
+    }
 
     public static void readData(){
         File file = new File("C:\\Users\\DELL\\Desktop\\Java_CODEGYM-Module2\\case-study\\src\\my_File\\AccountList.csv");

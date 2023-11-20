@@ -48,12 +48,14 @@ public class Admin extends User implements Serializable {
         }
 
     }
-    void addProduct(Product product){
+    public void addProduct(String name, double price, String description, int amount){
+        Product product = new Product(name, price, description, amount);
         readData();//
         myProductList.add(product);
+        System.out.println("Add successfully");
         writeData();
     }
-    void removeProduct(int id, int amount){
+    public void removeProduct(int id, int amount){
         readData();
         Product a = myProductList.get(id);
         a.amount -= amount;
@@ -85,7 +87,7 @@ public class Admin extends User implements Serializable {
         return myProductList.get(id);
     }
 
-    List<Product> getMyProductList(){
+    public List<Product> getMyProductList(){
         readData();
         return this.myProductList;
     }
