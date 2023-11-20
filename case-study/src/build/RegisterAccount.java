@@ -11,9 +11,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class RegisterAccount {
-    String account;
-    String password;
-    String accountName;
     static ObjectOutputStream oos;
     static ObjectInputStream ois;
     static List<User> accountList = new ArrayList<>();
@@ -54,7 +51,11 @@ public class RegisterAccount {
             }
         }
     }
-    public void resigter(String userName, String accountName, String password) {
+    public void resigter(String userName, String accountName, String password, String type) {
+        if(!type.equals("Shop") && !type.equals("Shop")){
+            System.out.println("Type must be Shop or Client");
+            return;
+        }
 
         if(accountName.length() > 15 || !accountName.matches(REGEX))
         {
@@ -62,7 +63,12 @@ public class RegisterAccount {
             return;
         }
         readData();
-        User newUser = new Client(userName, accountName, password);
+        User newUser;
+        if(type.equals("Shop")){
+            newUser = new Shop(userName, accountName, password);
+        } else {
+            newUser = new Client(userName, accountName, password);
+        }
         for(User user : this.accountList){
             if((user.accountName).equals(newUser.accountName)){
                 System.out.println("Account Name already exists");
@@ -73,12 +79,7 @@ public class RegisterAccount {
         writeData();
     }
 
-    private static void resigterAdAccount(String userName, String accountName, String password){
-        readData();
-        User user = new Admin(userName, accountName, password);
-        accountList.add(user);
-        writeData();
-    }
+
 
     public static void main(String[] args) {
         try (RandomAccessFile file = new RandomAccessFile("C:\\Users\\DELL\\Desktop\\Java_CODEGYM-Module2\\case-study\\src\\my_File\\ProductData.csv", "rw")) {
@@ -93,8 +94,7 @@ public class RegisterAccount {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        resigterAdAccount("Admin","admin","admin");
-        resigterAdAccount("Admin","admin1","admin1");
+
     }
 
 }

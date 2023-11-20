@@ -10,66 +10,57 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Admin extends User implements Serializable {
+public class Shop extends User implements Serializable {
 
-    private static double revenue = 0;
-    private static List<Product> myProductList;
+    private double revenue = 0;
+    List<Product> myProductList;
+    Shop shop;
     ObjectOutputStream oos;
     ObjectInputStream ois;
-    Admin(){
+    Shop(){
         super("","","");
         myProductList = new ArrayList<>();
     }
 
-    Admin(String userName, String accountName, String password){
+    Shop(String userName, String accountName, String password){
         super(userName, accountName, password);
         myProductList = new ArrayList<>();
     }
 
     void writeData(){
-        try{
-            oos = new ObjectOutputStream(new FileOutputStream("C:\\Users\\DELL\\Desktop\\Java_CODEGYM-Module2\\case-study\\src\\my_File\\ProductData.csv"));
-            oos.writeObject(myProductList);
-            oos.close();
-        } catch(Exception e){
-            e.printStackTrace();
-        }
+        RegisterAccount.writeData1();
     }
     void readData(){
-        File file = new File("C:\\Users\\DELL\\Desktop\\Java_CODEGYM-Module2\\case-study\\src\\my_File\\ProductData.csv");
-        if(file.length() != 0) {
-            try {
-                ois = new ObjectInputStream(new FileInputStream("C:\\Users\\DELL\\Desktop\\Java_CODEGYM-Module2\\case-study\\src\\my_File\\ProductData.csv"));
-                myProductList = (List<Product>) ois.readObject();
-                ois.close();
-            } catch (IOException | ClassNotFoundException e) {
-                System.out.println("Error Read ProductData.csv");
-            }
+                RegisterAccount.readData();
+                for(User user : RegisterAccount.accountList){
+                    if(this.accountName.equals(user.accountName)){
+                        shop = ((Shop) user);
+                        break;
+                    }
         }
 
     }
     public void addProduct(String name, double price, String description, int amount){
         Product product = new Product(name, price, description, amount);
         readData();//
-        myProductList.add(product);
+        shop.myProductList.add(product);
         System.out.println("Add successfully");
         writeData();
     }
+    //------------------------------------------------
     public void removeProduct(int id, int amount){
         readData();
-        Product a = myProductList.get(id);
-        a.amount -= amount;
-            if (a.amount == 0) {
-                myProductList.remove(id);
-                int count = 0;
-                for (Product x : myProductList) x.id = count++;
+        Product product = shop.myProductList.get(id);
+        product.amount -= amount;
+            if (product.amount == 0) {
+                myProductList.remove(id);fdsfsd
             }
             writeData();
             Product.cnt--;
     }
-
-    static void setRevenue(double monney){
-        revenue += monney;
+    //------------------------------------------------
+    void setRevenue(double monney){
+        this.revenue += monney;
     }
 
     public double getRevenue() {

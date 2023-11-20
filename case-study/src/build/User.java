@@ -11,7 +11,6 @@ public abstract class User implements Serializable {
     String accountName;
     String password;
     //------------------------------------------
-
     public String getAccountName() {
         return accountName;
     }

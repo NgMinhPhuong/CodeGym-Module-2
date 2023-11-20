@@ -1,14 +1,12 @@
 package Main;
 
-import build.Admin;
 import build.Client;
 import build.Login;
 import build.RegisterAccount;
+import build.Shop;
 import build.User;
 
-import javax.security.auth.login.LoginContext;
-import java.io.IOException;
-import java.io.RandomAccessFile;
+
 import java.util.Scanner;
 
 public class test {
@@ -34,7 +32,9 @@ public class test {
                     password = sc.nextLine();
                     System.out.print("User Name is: ");
                     userName = sc.nextLine();
-                    registerAccount.resigter(userName, accountName, password);
+                    System.out.print("Type('Shop' or 'Client': ");
+                    String type = sc.nextLine();
+                    registerAccount.resigter(userName, accountName, password, type);
                     System.out.println("------------------------------------------------------------");
                     break;
                 case 2:
@@ -64,7 +64,7 @@ public class test {
                             sc.nextLine();
                             switch (choose1){
                                 case 1:
-                                    client.addIntoBasket();
+                                    //client.addIntoBasket();
                                     break;
                                 case 4:
                                     System.out.print("You want to connect to Account: ");
@@ -86,14 +86,14 @@ public class test {
                             }
                             System.out.println("------------------------------------------------------------");
                         }
-                    }else if(user instanceof Admin){
-                        Admin admin = (Admin) user;
+                    }else if(user instanceof Shop){
+                        Shop shop = (Shop) user;
                         while(choose1 != 6)
                         {
                             System.out.println("1: Add a Product To Basket");
                             System.out.println("2: Add a Product To Basket");
                             System.out.println("3. Buy Product");
-                            System.out.println();
+                            System.out.print("Enter your choose: ");
                             choose1 = sc.nextInt();
                             switch (choose1){
                                 case 1:
@@ -103,7 +103,7 @@ public class test {
                                     int amount = sc.nextInt();
                                     sc.nextLine();
                                     String description = sc.nextLine();
-                                    admin.addProduct(name, price, description, amount);
+                                    shop.addProduct(name, price, description, amount);
                                     break;
                             }
                             System.out.println("------------------------------------------------------------");

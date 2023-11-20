@@ -40,12 +40,12 @@ public class Client extends User implements Serializable {
     public void setPaymentMethod(PaymentMethod paymentMethod){
         this.paymentMethod = paymentMethod;
     }
-    public void pay(Product product, int amount){
+    public void pay(Product product, int amount, Shop shop){
         if(paymentMethod == null)  {
             System.out.println("Chose a PaymentMethod please");
             return;
         }
-        paymentMethod.pay(this, product, amount);
+        paymentMethod.pay(this, product, amount, shop);
     }
     public void showBasket(){
         for(Product x : basket) System.out.println(x);
