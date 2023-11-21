@@ -50,10 +50,18 @@ public class test {
                     System.out.println("------------------------------------------------------------");
                     if(user == null) continue;
                     int choose1 = 0;
+                    String accountNameOfuser = user.getAccountName();
                     if (user instanceof Client) {
-                        Client client = (Client) user;
                         while(choose1 != 7)
                         {
+                            Client client = null;
+                            DataFile.readClient();
+                            for(User x : RegisterAccount.accountClientList){
+                                if(x.getAccountName().equals(accountNameOfuser)){
+                                    client = (Client) x;
+                                    break;
+                                }
+                            }
                             System.out.println("                                          Welcome " + client.getAccountName());
                             System.out.println("1: Add a Product To Basket");
                             System.out.println("2: Remove a Product To Basket");
@@ -120,7 +128,7 @@ public class test {
                                     int amount = sc.nextInt();
                                     sc.nextLine();
                                     String description = sc.nextLine();
-                                    shop.addProduct(name, price, description, amount);
+                                    .addProduct(name, price, description, amount);
                                     break;
                             }
                             System.out.println("------------------------------------------------------------");
