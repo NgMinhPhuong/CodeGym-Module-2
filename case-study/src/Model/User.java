@@ -1,4 +1,4 @@
-package build;
+package Model;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -10,6 +10,10 @@ public abstract class User implements Serializable {
     String userName;
     String accountName;
     String password;
+    PaymentMethod paymentMethod;
+    AddMoneyMethod addMoneyMethod;
+    double account = 0;
+    double bankCard = 1000000;
     //------------------------------------------
     public String getAccountName() {
         return accountName;
@@ -24,11 +28,17 @@ public abstract class User implements Serializable {
     //--------------------------------
     User checkExists(String accountName){
         User user = null;
-        RegisterAccount.readData();
-        for(User x : RegisterAccount.accountList){
+        DataFile.readData();
+        for(User x : RegisterAccount.accountClientList){
             if((x.accountName).equals(accountName)){
                 user = x;
-                break;
+                return user;
+            }
+        }
+        for(User x : RegisterAccount.accountShopList){
+            if((x.accountName).equals(accountName)){
+                user = x;
+                return user;
             }
         }
         return user;
@@ -40,7 +50,6 @@ public abstract class User implements Serializable {
                 + "_And_" + user.userName + ".txt";
         String path1 = "C:\\Users\\DELL\\Desktop\\Java_CODEGYM-Module2\\case-study\\src\\my_File\\" + "MailBox_" + user.userName
                 + "_And_" + this.userName + ".txt";
-
 
         if(new File(path).exists()){
             return path;
@@ -68,7 +77,7 @@ public abstract class User implements Serializable {
                 try{
                     fileConnect.createNewFile();
                     System.out.println("Connect To " + user.accountName + "(" + user.userName + ") Successfully");
-                    RegisterAccount.writeData1();
+                    DataFile.writeData();
                     return;
                 } catch (IOException e) {
                     throw new RuntimeException(e);
@@ -128,6 +137,40 @@ public abstract class User implements Serializable {
             }
         }  catch (IOException e) {
             throw new RuntimeException(e);
+        }
+    }
+    public void setPaymentMethod(String type){
+        if(type.equals("Bank")) {
+            this.paymentMethod = new PayByCard();
+        } else if(type.equals("Account")){
+            this.paymentMethod = new PayByAccount();
+            return;
+        }
+        System.out.println("Type is Wrong. Type must be ('Bank' or 'Account')");
+
+    }
+
+    public PaymentMethod getPaymentMethod() {
+        return paymentMethod;
+    }
+
+    public void pay(Product product, int amount, Shop shop){
+        paymentMethod.pay(this, product, amount, shop);
+    }
+
+    public void setAddMoneyMethod(String type){
+        if(type.equals("PhoneCard")) {
+            this.addMoneyMethod = new AddByPhoneCard();
+        } else if(type.equals("Bank")){
+            this.addMoneyMethod = new AddByBank();
+        }
+        System.out.println("Type is Wrong. Type must be ('Bank' or 'PhoneCard')");
+    }
+    public void addMonneyToAccount(double monney){
+        if(addMoneyMethod == null){
+            System.out.println("Chose Add Method Please");
+        } else{
+            addMoneyMethod.add(this, monney);
         }
     }
 }

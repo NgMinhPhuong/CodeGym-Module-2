@@ -1,14 +1,17 @@
 package Main;
 
-import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 public class test1 implements Serializable {
     int data = 2;
+    test1(int data){
+        this.data = data;
+    }
     String name = "phuong";
     void in(){
         System.out.println("test1");
@@ -17,24 +20,21 @@ public class test1 implements Serializable {
         return name + "  " + data;
     }
     public static void main(String[] args) {
-        test1 a = new test1();
-        try {
-            ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("C:\\Users\\DELL\\Desktop\\Java_CODEGYM-Module2\\case-study\\src\\my_File\\ProductData.csv"));
-            oos.writeObject(a);
-            oos.close();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+        List<test1> b = new ArrayList<>();
+        List<test1> c = new ArrayList<>();
+        b.add(new test1(2));
+        b.add(new test1(3));
+        b.add(new test1(2));
+        for(test1 x : b){
+            if(x.data == 2) {
+                b.remove(x);
+                break;
+            }
 
-        try {
-            ObjectInputStream ois = new ObjectInputStream(new FileInputStream("C:\\Users\\DELL\\Desktop\\Java_CODEGYM-Module2\\case-study\\src\\my_File\\ProductData.csv"));
-            test1 b;
-            System.out.println(b = (test1) ois.readObject());
-            if(b == a) System.out.println("YES");
-            ois.close();
-        } catch (IOException | ClassNotFoundException e) {
-            throw new RuntimeException(e);
         }
+        for(test1 x : b) System.out.println(x);
+        System.out.println(b.get(0));
+        System.out.println(b.get(1));
 
     }
 }

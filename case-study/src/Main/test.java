@@ -1,10 +1,13 @@
 package Main;
 
-import build.Client;
-import build.Login;
-import build.RegisterAccount;
-import build.Shop;
-import build.User;
+import Controller.ClientController;
+import Controller.RegisterAccountController;
+import Model.Client;
+import Model.DataFile;
+import Model.Login;
+import Model.RegisterAccount;
+import Model.Shop;
+import Model.User;
 
 
 import java.util.Scanner;
@@ -25,16 +28,15 @@ public class test {
             sc.nextLine();
             switch (choose) {
                 case 1:
-                    RegisterAccount registerAccount = new RegisterAccount();
                     System.out.print("Create accountName is: ");
                     accountName = sc.nextLine();
                     System.out.print("Create password is: ");
                     password = sc.nextLine();
                     System.out.print("User Name is: ");
                     userName = sc.nextLine();
-                    System.out.print("Type('Shop' or 'Client': ");
+                    System.out.print("Type('Shop' or 'Client'): ");
                     String type = sc.nextLine();
-                    registerAccount.resigter(userName, accountName, password, type);
+                    RegisterAccountController.getInstance().resigter(userName, accountName, password, type);
                     System.out.println("------------------------------------------------------------");
                     break;
                 case 2:
@@ -53,7 +55,7 @@ public class test {
                         {
                             System.out.println("                                          Welcome " + client.getAccountName());
                             System.out.println("1: Add a Product To Basket");
-                            System.out.println("2: Add a Product To Basket");
+                            System.out.println("2: Remove a Product To Basket");
                             System.out.println("3. Buy Product");
                             System.out.println("4. Connect To Another User");
                             System.out.println("5. Send A Message");
@@ -62,9 +64,21 @@ public class test {
                             System.out.print("Enter your choose: ");
                             choose1 = sc.nextInt();
                             sc.nextLine();
+                            int id = 0;
                             switch (choose1){
                                 case 1:
-                                    //client.addIntoBasket();
+                                    System.out.print("Id want to Add Basket: ");
+                                    id = sc.nextInt();
+                                    ClientController.getInstance().addIntoBasket(id, client);
+                                    break;
+                                case 2:
+                                    System.out.print("Id want to remove from Basket: ");
+                                    id = sc.nextInt();
+                                    ClientController.getInstance().removeFromBasket(id, client);
+                                    break;
+                                case 3:
+                                    System.out.println("Id sản");
+                                    System.out.println("");
                                     break;
                                 case 4:
                                     System.out.print("You want to connect to Account: ");

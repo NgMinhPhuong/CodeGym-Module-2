@@ -1,9 +1,9 @@
-package build;
+package Model;
 
 public class AddByPhoneCard implements AddMoneyMethod {
     @Override
-    public void add(Client client, double monney) {
+    public void add(User user, double monney) {
         System.out.println("Add With PhoneCard");
-        client.account += monney;
+        user.account += monney;
     }
 }
