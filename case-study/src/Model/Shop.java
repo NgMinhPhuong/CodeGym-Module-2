@@ -21,7 +21,7 @@ Shop extends User implements Serializable {
         myProductList = new ArrayList<>();
     }
 
-    Shop(String userName, String accountName, String password){
+    public Shop(String userName, String accountName, String password){
         super(userName, accountName, password);
         myProductList = new ArrayList<>();
     }

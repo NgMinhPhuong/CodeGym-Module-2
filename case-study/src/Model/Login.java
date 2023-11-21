@@ -6,7 +6,8 @@ public class Login {
     }
 
     public User login(String accountName, String password){
-                DataFile.readData();
+                DataFile.readClient();
+                DataFile.readShop();
                 for(User user : RegisterAccount.accountClientList) {
                     if ((user.accountName).equals(accountName) && (user.password).equals(password)) {
                         System.out.println("Login successfully. Welcome My Client " + user.userName);

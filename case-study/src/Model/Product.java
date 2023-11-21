@@ -8,9 +8,8 @@ public class Product implements Serializable {
     int id;
     String name;
     int amount;
-    double price;
+    public double price;
     String description;
-    public static List<Product> productList = new ArrayList<>();
 
     public int getId() {
         return id;
@@ -22,9 +21,13 @@ public class Product implements Serializable {
         this.price = price;
         this.description = description;
         this.amount = amount;
-        DataFile.readData();
-        productList.add(this);
-        DataFile.writeData();
+
+    }
+
+
+
+    public int getAmount() {
+        return amount;
     }
 
     public String toString(){

@@ -2,6 +2,7 @@ package Main;
 
 import Controller.ClientController;
 import Controller.RegisterAccountController;
+import Controller.UserController;
 import Model.Client;
 import Model.DataFile;
 import Model.Login;
@@ -69,15 +70,17 @@ public class test {
                                 case 1:
                                     System.out.print("Id want to Add Basket: ");
                                     id = sc.nextInt();
-                                    ClientController.getInstance().addIntoBasket(id, client);
+                                    System.out.print("Product of Shop with AccountName: ");
+                                    accountName = sc.nextLine();
+                                    UserController.getInstance().addIntoBasket(id, client,accountName);
                                     break;
                                 case 2:
                                     System.out.print("Id want to remove from Basket: ");
                                     id = sc.nextInt();
-                                    ClientController.getInstance().removeFromBasket(id, client);
+                                    UserController.getInstance().removeFromBasket(id, client);
                                     break;
                                 case 3:
-                                    System.out.println("Id sản");
+                                    System.out.print("Id sản");
                                     System.out.println("");
                                     break;
                                 case 4:

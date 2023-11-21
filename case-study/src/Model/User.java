@@ -5,6 +5,8 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 public abstract class User implements Serializable {
     String userName;
@@ -14,6 +16,7 @@ public abstract class User implements Serializable {
     AddMoneyMethod addMoneyMethod;
     double account = 0;
     double bankCard = 1000000;
+    List<Product> basket = new ArrayList<>();
     //------------------------------------------
     public String getAccountName() {
         return accountName;
@@ -25,16 +28,26 @@ public abstract class User implements Serializable {
         this.accountName = accountName;
         this.password = password;
     }
+
+    public double getBankCard() {
+        return bankCard;
+    }
+
+    public double getAccount() {
+        return account;
+    }
+
     //--------------------------------
     User checkExists(String accountName){
         User user = null;
-        DataFile.readData();
+        DataFile.readClient();
         for(User x : RegisterAccount.accountClientList){
             if((x.accountName).equals(accountName)){
                 user = x;
                 return user;
             }
         }
+        DataFile.readShop();
         for(User x : RegisterAccount.accountShopList){
             if((x.accountName).equals(accountName)){
                 user = x;
@@ -77,7 +90,6 @@ public abstract class User implements Serializable {
                 try{
                     fileConnect.createNewFile();
                     System.out.println("Connect To " + user.accountName + "(" + user.userName + ") Successfully");
-                    DataFile.writeData();
                     return;
                 } catch (IOException e) {
                     throw new RuntimeException(e);
@@ -154,8 +166,8 @@ public abstract class User implements Serializable {
         return paymentMethod;
     }
 
-    public void pay(Product product, int amount, Shop shop){
-        paymentMethod.pay(this, product, amount, shop);
+    public void pay(Product product, int amount, User userSell){
+        paymentMethod.pay(product, amount,this, userSell);
     }
 
     public void setAddMoneyMethod(String type){
@@ -166,11 +178,42 @@ public abstract class User implements Serializable {
         }
         System.out.println("Type is Wrong. Type must be ('Bank' or 'PhoneCard')");
     }
+
     public void addMonneyToAccount(double monney){
         if(addMoneyMethod == null){
             System.out.println("Chose Add Method Please");
         } else{
             addMoneyMethod.add(this, monney);
+        }
+    }
+    public void addIntoBasket(Product product){
+        basket.add(product);
+
+    }
+
+
+    public void removeFromBasket(int id) {
+        for (Product product : basket) {
+            if (product.id == id) {
+                basket.remove(product);
+                break;
+            }
+        }
+        for (User user : RegisterAccount.accountClientList) {
+            for (Product product : user.basket) {
+                if (product.id == id) {
+                    user.basket.remove(product);
+                    return;
+                }
+            }
+        }
+    }
+
+    public void showBasket(){
+        DataFile.readShop();
+        DataFile.readClient();
+        for(Product x : basket){
+            System.out.println(x);
         }
     }
 }

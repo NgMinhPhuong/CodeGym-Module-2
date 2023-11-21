@@ -18,17 +18,16 @@ public class RegisterAccount {
     }
 
 
-    public static void resigter(String userName, String accountName, String password, String type) {
-        User newUser;
-        if(type.equals("Shop")){
-            newUser = new Shop(userName, accountName, password);
-        } else {
-            newUser = new Client(userName, accountName, password);
+    public static void resigter(String userName, String accountName, String password, User user) {
+        User newUser = user;
+        if(newUser instanceof Shop) {
+            accountShopList.add(newUser);
+            DataFile.writeShop();
         }
-        DataFile.readData();
-        if(newUser instanceof Shop) accountShopList.add(newUser);
-        else accountClientList.add(newUser);
-        DataFile.writeData();
+        else{
+            accountClientList.add(newUser);
+            DataFile.writeClient();
+        }
     }
 
 
