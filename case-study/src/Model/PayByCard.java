@@ -1,11 +1,13 @@
 package Model;
 
-public class PayByCard implements PaymentMethod {
+import java.io.Serializable;
+
+public class PayByCard implements PaymentMethod, Serializable {
 
     @Override
     public void pay(Product product, int amount, User userBuy,User userSell) {
         if(userBuy.bankCard < product.price * amount){
-            System.out.println("not Enough Monney");
+            System.out.println("Your BankCard is not Enough Monney");
             return;
         }
         userBuy.bankCard -= (product.price * amount);

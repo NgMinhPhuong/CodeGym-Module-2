@@ -4,12 +4,19 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Product implements Serializable {
+public class Product implements Serializable, Cloneable {
     int id;
     String name;
     int amount;
     public double price;
     String description;
+    public Product(Product another){
+        this.id = another.id;
+        this.name = another.name;
+        this.price = another.price;
+        this.description = another.description;
+        this.amount = another.amount;
+    }
 
     public int getId() {
         return id;

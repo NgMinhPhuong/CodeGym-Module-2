@@ -1,6 +1,8 @@
 package Model;
 
-public class PayByAccount implements PaymentMethod {
+import java.io.Serializable;
+
+public class PayByAccount implements PaymentMethod, Serializable {
 
 
     public PayByAccount() {
@@ -10,7 +12,7 @@ public class PayByAccount implements PaymentMethod {
     @Override
     public void pay(Product product, int amount, User userBuy,User userSell) {
         if(userBuy.account < product.price * amount){
-            System.out.println("Not Enough Monney");
+            System.out.println("Your Account is not Enough Monney");
             return;
         }
         userBuy.account -= product.price * amount;

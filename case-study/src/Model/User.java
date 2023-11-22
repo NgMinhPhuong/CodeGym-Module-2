@@ -151,14 +151,8 @@ public abstract class User implements Serializable {
             throw new RuntimeException(e);
         }
     }
-    public void setPaymentMethod(String type){
-        if(type.equals("Bank")) {
-            this.paymentMethod = new PayByCard();
-        } else if(type.equals("Account")){
-            this.paymentMethod = new PayByAccount();
-            return;
-        }
-        System.out.println("Type is Wrong. Type must be ('Bank' or 'Account')");
+    public void setPaymentMethod(PaymentMethod paymentMethod){
+        this.paymentMethod = paymentMethod;
 
     }
 
@@ -170,13 +164,12 @@ public abstract class User implements Serializable {
         paymentMethod.pay(product, amount,this, userSell);
     }
 
-    public void setAddMoneyMethod(String type){
-        if(type.equals("PhoneCard")) {
-            this.addMoneyMethod = new AddByPhoneCard();
-        } else if(type.equals("Bank")){
-            this.addMoneyMethod = new AddByBank();
-        }
-        System.out.println("Type is Wrong. Type must be ('Bank' or 'PhoneCard')");
+    public void setAddMoneyMethod(AddMoneyMethod addMoneyMethod){
+        this.addMoneyMethod = addMoneyMethod;
+    }
+
+    public AddMoneyMethod getAddMoneyMethod() {
+        return addMoneyMethod;
     }
 
     public void addMonneyToAccount(double monney){
@@ -188,25 +181,22 @@ public abstract class User implements Serializable {
     }
     public void addIntoBasket(Product product){
         basket.add(product);
-
     }
 
 
     public void removeFromBasket(int id) {
-        for (Product product : basket) {
-            if (product.id == id) {
-                basket.remove(product);
-                break;
+        for(int i = 0; i < basket.size(); i++)
+        {
+            if(basket.get(i).id == id){
+                basket.remove(i);
+                return;
             }
         }
-        for (User user : RegisterAccount.accountClientList) {
-            for (Product product : user.basket) {
-                if (product.id == id) {
-                    user.basket.remove(product);
-                    return;
-                }
-            }
-        }
+
+    }
+
+    public List<Product> getBasket() {
+        return basket;
     }
 
     public void showBasket(){

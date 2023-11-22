@@ -1,6 +1,7 @@
 package Controller;
 
 import Model.DataFile;
+import Model.Product;
 import Model.Shop;
 
 public class ShopController {
@@ -23,9 +24,15 @@ public class ShopController {
     }
 
     public void removeProductFromStore(int id, Shop shop){
-        shop.removeProduct(id);
-        DataFile.writeShop();
-        System.out.println("Remove successfully");
+        for(Product product : shop.getMyProductList()){
+            if(id == product.getId()){
+                shop.removeProduct(id);
+                DataFile.writeShop();
+                System.out.println("Remove successfully");
+                return;
+            }
+        }
+        System.out.println("In your Store has no this Id");
     }
 
     public void showMyProduct(Shop shop){
