@@ -212,6 +212,10 @@ public abstract class User implements Serializable {
     public void showBasket(){
         DataFile.readShop();
         DataFile.readClient();
+        if(basket.size() == 0){
+            System.out.println("Basket is empty");
+            return;
+        }
         for(Product x : basket){
             System.out.println(x);
         }

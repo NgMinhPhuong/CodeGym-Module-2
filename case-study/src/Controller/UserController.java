@@ -7,7 +7,6 @@ import Model.RegisterAccount;
 import Model.Shop;
 import Model.User;
 
-import javax.xml.crypto.Data;
 
 public class UserController{
     private static UserController instance;
@@ -21,7 +20,6 @@ public class UserController{
         return instance;
     }
     public void pay(int id, int amount, String accountName, User userBuy){
-        DataFile.readShop();
         if(userBuy.getPaymentMethod() == null)  {
             System.out.println("Chose a PaymentMethod please");
             return;
@@ -62,8 +60,6 @@ public class UserController{
     }
 
     public void addIntoBasket(int id, User userBuy, String accountName){
-        DataFile.readShop();
-        DataFile.readClient();
         User userSell = null;
         for(User user : RegisterAccount.accountShopList){
             if(user.getAccountName().equals(accountName)){
@@ -89,8 +85,6 @@ public class UserController{
     }
 
     public void removeFromBasket(int id, User userBuy){
-        DataFile.readClient();
-        DataFile.readShop();
         for(Product product : ((Shop) userBuy).getMyProductList()){
             if(product.getId() == id){
                 ((Client) userBuy).removeFromBasket(id);
@@ -101,5 +95,9 @@ public class UserController{
             }
         }
         System.out.println("Id is not exists");
+    }
+
+    public void showBasket(User user){
+        user.showBasket();
     }
 }

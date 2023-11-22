@@ -10,7 +10,7 @@ import java.util.List;
 
 public class
 Shop extends User implements Serializable {
-    int cnt = 0;
+    int cnt = 1;
     private double revenue = 0;
     List<Product> myProductList;
 
@@ -27,18 +27,19 @@ Shop extends User implements Serializable {
     }
 
 
-    public void addProduct(String name, double price, String description, int amount){
+    public void addProduct(String name, double price, int amount, String description){
         Product product = new Product(cnt++, name, price, amount, description);
         myProductList.add(product);
     }
     //------------------------------------------------
-    public void removeProduct(int id, int amountBuy){
+    public void removeProduct(int id){
         for(int i = 0; i < myProductList.size(); i++){
             if(id == myProductList.get(i).id){
                 myProductList.remove(i);
                 return;
             }
         }
+
     }
     //------------------------------------------------
     void setRevenue(double monney){
@@ -67,6 +68,10 @@ Shop extends User implements Serializable {
         return this.myProductList;
     }
     public void showProductList(){
+        if(myProductList.size() == 0){
+            System.out.println("You don't have any products yet");
+            return;
+        }
         for(Product x : myProductList) System.out.println(x);
         System.out.println();
     }

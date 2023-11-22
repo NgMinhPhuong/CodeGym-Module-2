@@ -42,7 +42,7 @@ public class RegisterAccountController {
             }
         }
 
-        if(type.equals("shop")){
+        if(type.equals("Shop")){
             RegisterAccount.resigter(userName, accountName, password, new Shop(userName, accountName, password));
         } else{
             RegisterAccount.resigter(userName, accountName, password, new Client(userName, accountName, password));
