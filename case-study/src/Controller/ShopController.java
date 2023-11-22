@@ -20,6 +20,7 @@ public class ShopController {
     public void addProductIntoStore(String name, double price, int amount, String description, Shop shop){
         shop.addProduct(name, price, amount, description);
         DataFile.writeShop();
+        DataFile.writeClient();
         System.out.println("Add Successfully");
     }
 
@@ -28,6 +29,7 @@ public class ShopController {
             if(id == product.getId()){
                 shop.removeProduct(id);
                 DataFile.writeShop();
+                DataFile.writeClient();
                 System.out.println("Remove successfully");
                 return;
             }

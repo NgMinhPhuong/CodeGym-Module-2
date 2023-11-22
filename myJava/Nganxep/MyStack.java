@@ -1,4 +1,7 @@
 package Nganxep;
+
+import java.util.List;
+
 public class MyStack {
     private class Node{
         private int value;
@@ -49,9 +52,11 @@ public class MyStack {
     }
     public static void main(String[] args) {
 
-        MyQueue a = new MyQueue();
-        a.push(5);
-        a.push(6);
+        List<Integer> l = null;
+        l.add(6);
+        l.add(6);
+        l.add(6);
+        for(int x : l) System.out.println(x);
 
     }
 

@@ -11,6 +11,9 @@ import Model.RegisterAccount;
 import Model.Shop;
 import Model.User;
 
+import java.util.List;
+import java.util.Map;
+
 
 public class UserController {
     private static UserController instance;
@@ -43,7 +46,7 @@ public class UserController {
         for (Product product : ((Shop) userSell).getMyProductList()) {
             if (id == product.getId()) {
                 product = new Product(product);
-                userBuy.addIntoBasket(product);
+                userBuy.addIntoBasket(product, userSell.getAccountName());
                 System.out.println("Add successfully");
                 DataFile.writeClient();
                 DataFile.writeShop();
@@ -54,14 +57,28 @@ public class UserController {
 
     }
 
-    public void removeFromBasket(int id, User userBuy) {
-        for (Product product : userBuy.getBasket()) {
-            if (product.getId() == id){
-                userBuy.removeFromBasket(id);
-                System.out.println("Remove from your Basket successfully");
-                DataFile.writeClient();
-                DataFile.writeShop();
-                return;
+    public void removeFromBasket(int id, User userBuy, String accountName) {
+        User userSell = null;
+        for (User user : RegisterAccount.accountShopList) {
+            if (user.getAccountName().equals(accountName)) {
+                userSell = user;
+            }
+        }
+
+        if (userSell == null) {
+            System.out.println("This store is not available");
+            return;
+        }
+
+        for (Map.Entry<String, List<Product>> map : userBuy.getBasket().entrySet()){
+            for(Product product : map.getValue()){
+                if(product.getId() == id){
+                    userBuy.removeFromBasket(id, accountName);
+                    System.out.println("Remove from your Basket successfully");
+                    DataFile.writeClient();
+                    DataFile.writeShop();
+                    return;
+                }
             }
         }
         System.out.println("There is no this Id in your Basket");

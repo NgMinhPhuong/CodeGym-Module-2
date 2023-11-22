@@ -1,6 +1,7 @@
 package Model;
 
 import java.io.Serializable;
+import java.util.List;
 
 public class PayByCard implements PaymentMethod, Serializable {
 
@@ -23,15 +24,22 @@ public class PayByCard implements PaymentMethod, Serializable {
                 }
             }
         }
-        for(Product x : userBuy.basket){
+        List<Product> tmp = userBuy.basket.get(userSell.getAccountName());
+        if (tmp == null) return;
+        for(Product x : tmp){
             if(x.id == id1){
                 x.amount -= amount;
                 if(x.amount == 0){
-                    userBuy.basket.remove(x);
+                    tmp.remove(x);
+                    if(tmp.size() == 0) {
+                        userBuy.basket.remove(userSell.getAccountName());
+                    }
+                    break;
                 }
                 break;
             }
         }
+
         System.out.println("Payment success");
     }
 }

@@ -6,7 +6,9 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public abstract class User implements Serializable {
     String userName;
@@ -16,7 +18,8 @@ public abstract class User implements Serializable {
     AddMoneyMethod addMoneyMethod;
     double account = 0;
     double bankCard = 1000000;
-    List<Product> basket = new ArrayList<>();
+    List<Product> listValueMap = new ArrayList<>();
+    Map<String, List<Product>> basket = new HashMap<>();
     //------------------------------------------
     public String getAccountName() {
         return accountName;
@@ -33,7 +36,7 @@ public abstract class User implements Serializable {
         return bankCard;
     }
 
-    public double getAccount() {
+    public double getMonneyAccount() {
         return account;
     }
 
@@ -179,35 +182,47 @@ public abstract class User implements Serializable {
             addMoneyMethod.add(this, monney);
         }
     }
-    public void addIntoBasket(Product product){
-        basket.add(product);
+    public void addIntoBasket(Product product, String accountName){
+        if(basket.containsKey(accountName)){
+            List <Product> tmp = basket.get(accountName);
+            tmp.add(product);
+        } else {
+            List<Product> tmp = new ArrayList<>();
+            tmp.add(product);
+            basket.put(accountName, tmp);
+        }
+
     }
 
 
-    public void removeFromBasket(int id) {
-        for(int i = 0; i < basket.size(); i++)
-        {
-            if(basket.get(i).id == id){
-                basket.remove(i);
+    public void removeFromBasket(int id, String accountName) {
+        List<Product> tmp = basket.get(accountName);
+        for(Product product : tmp){
+            if(product.id == id){
+                basket.get(accountName).remove(product);
+                if(tmp.size() == 0){
+                    basket.remove(accountName);
+                }
                 return;
             }
         }
 
     }
 
-    public List<Product> getBasket() {
+    public Map<String, List<Product>> getBasket() {
         return basket;
     }
 
     public void showBasket(){
-        DataFile.readShop();
-        DataFile.readClient();
         if(basket.size() == 0){
             System.out.println("Basket is empty");
             return;
         }
-        for(Product x : basket){
-            System.out.println(x);
+        for(Map.Entry<String, List<Product>> map : basket.entrySet()){
+            System.out.println(map.getKey() + ": ");
+            for (Product product : map.getValue()){
+                System.out.println("         " + product);
+            }
         }
     }
 }

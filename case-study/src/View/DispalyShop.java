@@ -65,7 +65,9 @@ public class DispalyShop{
                     System.out.print("Id want to remove from Basket: ");
                     id = sc.nextInt();
                     sc.nextLine();
-                    UserController.getInstance().removeFromBasket(id, shop);
+                    System.out.print("Remove from Shop with Account Name: ");
+                    accountName = sc.nextLine();
+                    UserController.getInstance().removeFromBasket(id, shop, accountName);
                     break;
                 case 3:
                     UserController.getInstance().showBasket(shop);

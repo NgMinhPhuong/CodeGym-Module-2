@@ -13,8 +13,6 @@ public class DisplayClient {
         {
             Scanner sc = new Scanner(System.in);
             String accountName;
-            String password;
-            String userName;
             String type;
             int choose1 = -1;
             while(choose1 != 0)
@@ -62,7 +60,9 @@ public class DisplayClient {
                         System.out.print("Id want to remove from Basket: ");
                         id = sc.nextInt();
                         sc.nextLine();
-                        UserController.getInstance().removeFromBasket(id, client);
+                        System.out.print("Remove from Shop with Account Name: ");
+                        accountName = sc.nextLine();
+                        UserController.getInstance().removeFromBasket(id, client, accountName);
                         break;
                     case 3:
                         UserController.getInstance().showBasket(client);

@@ -21,20 +21,13 @@ public class test1 implements Serializable {
     }
     public static void main(String[] args) {
         List<test1> b = new ArrayList<>();
-        List<test1> c = new ArrayList<>();
-        b.add(new test1(2));
-        b.add(new test1(3));
-        b.add(new test1(2));
-        for(test1 x : b){
-            if(x.data == 2) {
-                b.remove(x);
-                break;
-            }
-
+        b.add(new test1(5));
+        b.add(new test1(5));
+        for(test1 x : b) {
+            b.remove(x);
+            break;
         }
-        for(test1 x : b) System.out.println(x);
-        System.out.println(b.get(0));
-        System.out.println(b.get(1));
+        for (test1 x : b) System.out.println(x);
 
     }
 }
