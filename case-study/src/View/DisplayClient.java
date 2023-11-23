@@ -2,7 +2,7 @@ package View;
 
 import Controller.UserController;
 import Model.Client;
-import Model.DataFile;
+import untils.DataFile;
 import Model.RegisterAccount;
 import Model.User;
 
@@ -20,7 +20,7 @@ public class DisplayClient {
                 Client client = null;
                 DataFile.readClient();
                 DataFile.readShop();
-                for(User x : RegisterAccount.accountClientList){
+                for(User x : RegisterAccount.getAccountClientList()){
                     if(x.getAccountName().equals(accountNameOfuser)){
                         client = (Client) x;
                         break;

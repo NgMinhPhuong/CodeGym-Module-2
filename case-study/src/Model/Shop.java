@@ -10,12 +10,10 @@ import java.util.List;
 
 public class
 Shop extends User implements Serializable {
-    int cnt = 1;
+    private int cnt = 1;
     private double revenue = 0;
     List<Product> myProductList;
 
-    ObjectOutputStream oos;
-    ObjectInputStream ois;
     Shop(){
         super("","","");
         myProductList = new ArrayList<>();
@@ -25,54 +23,36 @@ Shop extends User implements Serializable {
         super(userName, accountName, password);
         myProductList = new ArrayList<>();
     }
+    //----------------------------------------------------
 
 
-    public void addProduct(String name, double price, int amount, String description){
-        Product product = new Product(cnt++, name, price, amount, description);
-        myProductList.add(product);
-    }
-    //------------------------------------------------
-    public void removeProduct(int id){
-        for(int i = 0; i < myProductList.size(); i++){
-            if(id == myProductList.get(i).id){
-                myProductList.remove(i);
-                return;
-            }
-        }
-
-    }
-    //------------------------------------------------
-    void setRevenue(double monney){
-        this.revenue += monney;
+    public int getCnt() {
+        return cnt;
     }
 
     public double getRevenue() {
         return revenue;
     }
 
-    public void repairProduct(int id) {
-        for(int i = 0; i < myProductList.size(); i++){
-            if(id == myProductList.get(i).id){
-                myProductList.remove(i);
-                return;
-            }
-        }
-
+    public List<Product> getMyProductList() {
+        return myProductList;
     }
+    //--------------------------------------
 
-    public Product getProduct(int id){
-        return myProductList.get(id);
+    public void setCnt(int cnt) {
+        this.cnt = cnt;
     }
 
-    public List<Product> getMyProductList(){
-        return this.myProductList;
+    public void setRevenue(double revenue) {
+        this.revenue = revenue;
     }
-    public void showProductList(){
-        if(myProductList.size() == 0){
-            System.out.println("You don't have any products yet");
-            return;
-        }
-        for(Product x : myProductList) System.out.println(x);
-        System.out.println();
+
+    public void setMyProductList(List<Product> myProductList) {
+        this.myProductList = myProductList;
     }
+
+    //----------------------------------------
+
+
+
 }

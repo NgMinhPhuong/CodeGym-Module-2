@@ -1,6 +1,7 @@
 package Controller;
 
-import Model.DataFile;
+import service.ShopService;
+import untils.DataFile;
 import Model.Product;
 import Model.Shop;
 
@@ -18,7 +19,7 @@ public class ShopController {
     }
 
     public void addProductIntoStore(String name, double price, int amount, String description, Shop shop){
-        shop.addProduct(name, price, amount, description);
+        ShopService.getInstance().addProduct(shop, name, price, amount, description);
         DataFile.writeShop();
         DataFile.writeClient();
         System.out.println("Add Successfully");
@@ -27,7 +28,7 @@ public class ShopController {
     public void removeProductFromStore(int id, Shop shop){
         for(Product product : shop.getMyProductList()){
             if(id == product.getId()){
-                shop.removeProduct(id);
+                ShopService.getInstance().removeProduct(shop, id);
                 DataFile.writeShop();
                 DataFile.writeClient();
                 System.out.println("Remove successfully");
@@ -38,6 +39,6 @@ public class ShopController {
     }
 
     public void showMyProduct(Shop shop){
-        shop.showProductList();
+        ShopService.getInstance().showProductList(shop);
     }
 }

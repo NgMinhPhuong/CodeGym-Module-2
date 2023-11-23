@@ -1,10 +1,4 @@
 package Controller;
-import Model.Client;
-import Model.DataFile;
-import Model.Product;
-import Model.RegisterAccount;
-import Model.Shop;
-import Model.User;
 
 
 public class ClientController {

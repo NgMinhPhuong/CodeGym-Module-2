@@ -1,5 +1,7 @@
 package Model;
 
+import untils.DataFile;
+
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -8,27 +10,33 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class RegisterAccount {
-    static ObjectOutputStream oos;
-    static ObjectInputStream ois;
-    public static List<User> accountClientList = new ArrayList<>();
-    public static List<User> accountShopList = new ArrayList<>();
+    private static List<User> accountClientList = new ArrayList<>();
+    private static List<User> accountShopList = new ArrayList<>();
     public static final String REGEX = "([a-z]){5,13}(\\d){2,5}";
     public RegisterAccount(){
 
     }
-
-
-    public static void resigter(String userName, String accountName, String password, User user) {
-        User newUser = user;
-        if(newUser instanceof Shop) {
-            accountShopList.add(newUser);
-            DataFile.writeShop();
-        }
-        else{
-            accountClientList.add(newUser);
-            DataFile.writeClient();
-        }
+    //-------------------------------------------
+    public static List<User> getAccountClientList() {
+        return accountClientList;
     }
+
+    public static List<User> getAccountShopList() {
+        return accountShopList;
+    }
+
+    //------------------------------------------------
+    public static void setAccountClientList(List<User> accountClientList) {
+        RegisterAccount.accountClientList = accountClientList;
+    }
+
+    public static void setAccountShopList(List<User> accountShopList) {
+        RegisterAccount.accountShopList = accountShopList;
+    }
+
+    //--------------------------------------------------------------------
+
+
 
 
 

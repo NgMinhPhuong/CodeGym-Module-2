@@ -1,6 +1,7 @@
 package Main;
 
 import java.io.FileOutputStream;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
@@ -20,14 +21,13 @@ public class test1 implements Serializable {
         return name + "  " + data;
     }
     public static void main(String[] args) {
-        List<test1> b = new ArrayList<>();
-        b.add(new test1(5));
-        b.add(new test1(5));
-        for(test1 x : b) {
-            b.remove(x);
-            break;
+        try {
+            FileWriter fileWriter = new FileWriter("C:\\Users\\DELL\\Desktop\\Java_CODEGYM-Module2\\case-study\\src\\my_File\\test.csv");
+            fileWriter.write("fdsfs,4324 \n");
+            fileWriter.write("cascsa");
+            fileWriter.close();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
-        for (test1 x : b) System.out.println(x);
-
     }
 }

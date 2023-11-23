@@ -1,4 +1,6 @@
 package Model;
+import untils.DataFile;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -11,47 +13,109 @@ import java.util.List;
 import java.util.Map;
 
 public abstract class User implements Serializable {
-    String userName;
-    String accountName;
-    String password;
-    PaymentMethod paymentMethod;
-    AddMoneyMethod addMoneyMethod;
-    double account = 0;
-    double bankCard = 1000000;
-    List<Product> listValueMap = new ArrayList<>();
-    Map<String, List<Product>> basket = new HashMap<>();
-    //------------------------------------------
-    public String getAccountName() {
-        return accountName;
-    }
-
-    //------------------------------------------
+    private String userName;
+    private String accountName;
+    private String password;
+    private PaymentMethod paymentMethod;
+    private AddMoneyMethod addMoneyMethod;
+    private double account = 0;
+    private double bankCard = 1000000;
+    private Map<String, List<Product>> basket = new HashMap<>();
+    private List<Product> listValueMap = new ArrayList<>();
+    //------------------------------------------------------
     public User(String userName, String accountName, String password) {
         this.userName = userName;
         this.accountName = accountName;
         this.password = password;
+    }
+    //----------------------------------------------------------
+    public String getUserName() {
+        return userName;
+    }
+
+    public String getAccountName() {
+        return accountName;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public PaymentMethod getPaymentMethod() {
+        return paymentMethod;
+    }
+
+    public AddMoneyMethod getAddMoneyMethod() {
+        return addMoneyMethod;
+    }
+
+    public double getAccount() {
+        return account;
     }
 
     public double getBankCard() {
         return bankCard;
     }
 
-    public double getMonneyAccount() {
-        return account;
+    public Map<String, List<Product>> getBasket() {
+        return basket;
     }
 
-    //--------------------------------
+    public List<Product> getListValueMap() {
+        return listValueMap;
+    }
+
+    //------------------------------------------
+
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public void setAccountName(String accountName) {
+        this.accountName = accountName;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public void setPaymentMethod(PaymentMethod paymentMethod) {
+        this.paymentMethod = paymentMethod;
+    }
+
+    public void setAddMoneyMethod(AddMoneyMethod addMoneyMethod) {
+        this.addMoneyMethod = addMoneyMethod;
+    }
+
+    public void setAccount(double account) {
+        this.account = account;
+    }
+
+    public void setBankCard(double bankCard) {
+        this.bankCard = bankCard;
+    }
+
+    public void setBasket(Map<String, List<Product>> basket) {
+        this.basket = basket;
+    }
+
+    public void setListValueMap(List<Product> listValueMap) {
+        this.listValueMap = listValueMap;
+    }
+
+    //-----------------------------------------------
     User checkExists(String accountName){
         User user = null;
         DataFile.readClient();
-        for(User x : RegisterAccount.accountClientList){
+        for(User x : RegisterAccount.getAccountClientList()){
             if((x.accountName).equals(accountName)){
                 user = x;
                 return user;
             }
         }
         DataFile.readShop();
-        for(User x : RegisterAccount.accountShopList){
+        for(User x : RegisterAccount.getAccountShopList()){
             if((x.accountName).equals(accountName)){
                 user = x;
                 return user;
@@ -152,77 +216,6 @@ public abstract class User implements Serializable {
             }
         }  catch (IOException e) {
             throw new RuntimeException(e);
-        }
-    }
-    public void setPaymentMethod(PaymentMethod paymentMethod){
-        this.paymentMethod = paymentMethod;
-
-    }
-
-    public PaymentMethod getPaymentMethod() {
-        return paymentMethod;
-    }
-
-    public void pay(Product product, int amount, User userSell){
-        paymentMethod.pay(product, amount,this, userSell);
-    }
-
-    public void setAddMoneyMethod(AddMoneyMethod addMoneyMethod){
-        this.addMoneyMethod = addMoneyMethod;
-    }
-
-    public AddMoneyMethod getAddMoneyMethod() {
-        return addMoneyMethod;
-    }
-
-    public void addMonneyToAccount(double monney){
-        if(addMoneyMethod == null){
-            System.out.println("Chose Add Method Please");
-        } else{
-            addMoneyMethod.add(this, monney);
-        }
-    }
-    public void addIntoBasket(Product product, String accountName){
-        if(basket.containsKey(accountName)){
-            List <Product> tmp = basket.get(accountName);
-            tmp.add(product);
-        } else {
-            List<Product> tmp = new ArrayList<>();
-            tmp.add(product);
-            basket.put(accountName, tmp);
-        }
-
-    }
-
-
-    public void removeFromBasket(int id, String accountName) {
-        List<Product> tmp = basket.get(accountName);
-        for(Product product : tmp){
-            if(product.id == id){
-                basket.get(accountName).remove(product);
-                if(tmp.size() == 0){
-                    basket.remove(accountName);
-                }
-                return;
-            }
-        }
-
-    }
-
-    public Map<String, List<Product>> getBasket() {
-        return basket;
-    }
-
-    public void showBasket(){
-        if(basket.size() == 0){
-            System.out.println("Basket is empty");
-            return;
-        }
-        for(Map.Entry<String, List<Product>> map : basket.entrySet()){
-            System.out.println(map.getKey() + ": ");
-            for (Product product : map.getValue()){
-                System.out.println("         " + product);
-            }
         }
     }
 }

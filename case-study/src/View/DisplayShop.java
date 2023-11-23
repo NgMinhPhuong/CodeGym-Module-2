@@ -2,14 +2,14 @@ package View;
 
 import Controller.ShopController;
 import Controller.UserController;
-import Model.DataFile;
+import untils.DataFile;
 import Model.RegisterAccount;
 import Model.Shop;
 import Model.User;
 
 import java.util.Scanner;
 
-public class DispalyShop{
+public class DisplayShop {
     public static void display(String accountNameOfuser){
         Scanner sc = new Scanner(System.in);
         String accountName;
@@ -22,7 +22,7 @@ public class DispalyShop{
             Shop shop = null;
             DataFile.readShop();
             DataFile.readClient();
-            for(User x : RegisterAccount.accountShopList){
+            for(User x : RegisterAccount.getAccountShopList()){
                 if(x.getAccountName().equals(accountNameOfuser)){
                     shop = (Shop) x;
                     break;

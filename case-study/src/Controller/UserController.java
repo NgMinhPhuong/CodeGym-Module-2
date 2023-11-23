@@ -2,8 +2,8 @@ package Controller;
 
 import Model.AddByBank;
 import Model.AddByPhoneCard;
-import Model.Client;
-import Model.DataFile;
+import service.UserService;
+import untils.DataFile;
 import Model.PayByAccount;
 import Model.PayByCard;
 import Model.Product;
@@ -29,13 +29,14 @@ public class UserController {
         return instance;
     }
 
+    //-----------------------------------------------------------
 
-
-    public void addIntoBasket(int id, User userBuy, String accountName) {
+    public void addIntoBasket(int id, User userAdd, String accountName) {
         User userSell = null;
-        for (User user : RegisterAccount.accountShopList) {
+        for (User user : RegisterAccount.getAccountShopList()) {
             if (user.getAccountName().equals(accountName)) {
                 userSell = user;
+                break;
             }
         }
 
@@ -46,7 +47,7 @@ public class UserController {
         for (Product product : ((Shop) userSell).getMyProductList()) {
             if (id == product.getId()) {
                 product = new Product(product);
-                userBuy.addIntoBasket(product, userSell.getAccountName());
+                UserService.getInstance().addIntoBasket(userAdd ,product, accountName);
                 System.out.println("Add successfully");
                 DataFile.writeClient();
                 DataFile.writeShop();
@@ -57,11 +58,14 @@ public class UserController {
 
     }
 
-    public void removeFromBasket(int id, User userBuy, String accountName) {
+    //------------------------------------------------------------------
+
+    public void removeFromBasket(int id, User userRemove, String accountName) {
         User userSell = null;
-        for (User user : RegisterAccount.accountShopList) {
+        for (User user : RegisterAccount.getAccountShopList()) {
             if (user.getAccountName().equals(accountName)) {
                 userSell = user;
+                break;
             }
         }
 
@@ -70,10 +74,10 @@ public class UserController {
             return;
         }
 
-        for (Map.Entry<String, List<Product>> map : userBuy.getBasket().entrySet()){
+        for (Map.Entry<String, List<Product>> map : userRemove.getBasket().entrySet()){
             for(Product product : map.getValue()){
                 if(product.getId() == id){
-                    userBuy.removeFromBasket(id, accountName);
+                    UserService.getInstance().removeFromBasket(userRemove, id, accountName);
                     System.out.println("Remove from your Basket successfully");
                     DataFile.writeClient();
                     DataFile.writeShop();
@@ -84,11 +88,14 @@ public class UserController {
         System.out.println("There is no this Id in your Basket");
     }
 
+    //---------------------------------------------------------------------------
+
     public void showBasket(User user) {
-        user.showBasket();
+        UserService.getInstance().showBasket(user);
     }
 
-    public void setPaymentMethod(String type, User user) {
+    //----------------------------------------
+    public void setPaymentMethod(String type, User user){
         if (type.equals("Bank")) {
             user.setPaymentMethod(new PayByCard());
             System.out.println("Selected !");
@@ -105,13 +112,14 @@ public class UserController {
         System.out.println("Type is Wrong. Type must be ('Bank' or 'Account')");
     }
 
+    //--------------------------------------------------------
     public void pay(int id, int amount, String accountName, User userBuy) {
         if (userBuy.getPaymentMethod() == null) {
             System.out.println("Chose a PaymentMethod please");
             return;
         }
         Product product = null;
-        for (User user : RegisterAccount.accountShopList) {
+        for (User user : RegisterAccount.getAccountShopList()) {
             for (Product x : ((Shop) user).getMyProductList()) {
                 if (x.getId() == id) {
                     product = x;
@@ -125,7 +133,7 @@ public class UserController {
         }
 
         User userSell = null;
-        for (User x : RegisterAccount.accountShopList) {
+        for (User x : RegisterAccount.getAccountShopList()) {
             if (x.getAccountName().equals(accountName)) {
                 userSell = x;
                 break;
@@ -140,11 +148,12 @@ public class UserController {
             System.out.println("We only have " + product.getAmount() + " of them");
             return;
         }
-        userBuy.pay(product, amount, userSell);
+        UserService.getInstance().pay(product, amount, userBuy, userSell);
         DataFile.writeClient();
         DataFile.writeShop();
     }
 
+    //-------------------------------------------------------------
     public void setAddMoneyMethod(String type, User user){
         if (type.equals("Bank")) {
             user.setAddMoneyMethod(new AddByBank());
@@ -172,14 +181,13 @@ public class UserController {
                 System.out.println("Your cardAccount is not enough monney");
                 return;
             }
-            user.addMonneyToAccount(monney);
+            UserService.getInstance().addMonneyToAccount(user, monney);
             DataFile.writeShop();
             DataFile.writeClient();
         } else{
-            user.addMonneyToAccount(monney);
+            UserService.getInstance().addMonneyToAccount(user, monney);
             DataFile.writeShop();
             DataFile.writeClient();
         }
     }
-
 }

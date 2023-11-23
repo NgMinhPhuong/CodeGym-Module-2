@@ -1,14 +1,12 @@
 package View;
 
-import Controller.RegisterAccountController;
-import Model.Client;
-import Model.Login;
-import Model.Shop;
+import Controller.Register_LoginController;
 import Model.User;
+import untils.DataFile;
 
 import java.util.Scanner;
 
-public class DisplayRegister {
+public class DisplayLogin_Register {
     public static User display(){
         Scanner sc = new Scanner(System.in);
         String accountName;
@@ -16,6 +14,8 @@ public class DisplayRegister {
         String userName;
         int choose = -1;
         while(choose != 3) {
+            DataFile.readClient();
+            DataFile.readShop();
             System.out.println("1. Resigter an account");
             System.out.println("2. Login");
             System.out.println("3. Exit");
@@ -39,7 +39,7 @@ public class DisplayRegister {
                     userName = sc.nextLine();
                     System.out.print("Type('Shop' or 'Client'): ");
                     String type = sc.nextLine();
-                    RegisterAccountController.getInstance().resigter(userName, accountName, password, type);
+                    Register_LoginController.getInstance().resigter(userName, accountName, password, type);
                     System.out.println("------------------------------------------------------------");
                     break;
                 case 2:
@@ -47,8 +47,7 @@ public class DisplayRegister {
                     accountName = sc.nextLine();
                     System.out.print("Enter your password: ");
                     password = sc.nextLine();
-                    Login login = new Login();
-                    User user = login.login(accountName, password);
+                    User user = Register_LoginController.getInstance().login(accountName, password);
                     System.out.println("------------------------------------------------------------");
                     if(user == null) continue;
                     return user;
