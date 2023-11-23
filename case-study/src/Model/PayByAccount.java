@@ -30,7 +30,10 @@ public class PayByAccount implements PaymentMethod, Serializable {
             }
         }
         List<Product> tmp = userBuy.getBasket().get(userSell.getAccountName());
-        if (tmp == null) return;
+        if (tmp == null) {
+            System.out.println("Payment success");
+            return;
+        }
         for(Product x : tmp){
             if(x.getId() == id1){
                 x.setAmount(x.getAmount() - amount);

@@ -9,9 +9,6 @@ import java.util.Scanner;
 public class DisplayLogin_Register {
     public static User display(){
         Scanner sc = new Scanner(System.in);
-        String accountName;
-        String password;
-        String userName;
         int choose = -1;
         while(choose != 3) {
             DataFile.readClient();
@@ -31,24 +28,10 @@ public class DisplayLogin_Register {
 
             switch (choose) {
                 case 1:
-                    System.out.print("Create accountName is: ");
-                    accountName = sc.nextLine();
-                    System.out.print("Create password is: ");
-                    password = sc.nextLine();
-                    System.out.print("User Name is: ");
-                    userName = sc.nextLine();
-                    System.out.print("Type('Shop' or 'Client'): ");
-                    String type = sc.nextLine();
-                    Register_LoginController.getInstance().resigter(userName, accountName, password, type);
-                    System.out.println("------------------------------------------------------------");
+                    DisPlay.getInstance().displayRegister();
                     break;
                 case 2:
-                    System.out.print("Enter your accountName: ");
-                    accountName = sc.nextLine();
-                    System.out.print("Enter your password: ");
-                    password = sc.nextLine();
-                    User user = Register_LoginController.getInstance().login(accountName, password);
-                    System.out.println("------------------------------------------------------------");
+                    User user = DisPlay.getInstance().displayLogin();
                     if(user == null) continue;
                     return user;
             }
