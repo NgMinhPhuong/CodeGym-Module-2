@@ -78,7 +78,7 @@ public class DisplayShop {
                     DisPlay.getInstance().checkMonneyInBankCard(shop);
                     break;
                 case 16:
-                    DisPlay.getInstance().voteProduct();
+                    DisPlay.getInstance().voteProduct(shop);
                     break;
                 case 17:
                     DisPlay.getInstance().showVoteProduct();

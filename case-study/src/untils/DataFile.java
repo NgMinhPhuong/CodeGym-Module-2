@@ -7,7 +7,6 @@ import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -89,7 +88,7 @@ public class DataFile {
     //-----------------------------------------------------------------
 
 
-    public void writeVote(String path, String accountName, int star, String comment){
+    public void writeVote(String path, int star, String comment, User userComment){
         file = new File(path);
         if(!file.exists()){
             try {
@@ -98,27 +97,21 @@ public class DataFile {
                 throw new RuntimeException(e);
             }
         }
-
-        List<String> list = new ArrayList<>();
-        String s;
-        String [] ss;
-        try(BufferedReader bufferedReader = new BufferedReader(new FileReader(path))){
-            while((s = bufferedReader.readLine()) != null){
-                list.add(s);
-            }
-        }  catch (IOException e){
-            throw new RuntimeException(e);
-        }
+        String  [] ss;
+        List<String> list;
+        list = readVote(path);
         for(String str : list){
-            if(str.contains(accountName)){
+            ss = str.split(",");
+            if(ss[0].equals(userComment.getAccountName())){
                 list.remove(str);
                 break;
             }
         }
-        list.add(accountName + "," + star + "," + comment );
+        list.add(userComment.getAccountName() + "," + star + "," + comment );
         try(BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(path));){
             for(String str : list){
-                bufferedWriter.write(str + "\n");
+                bufferedWriter.write(str);
+                bufferedWriter.newLine();
             }
         } catch (IOException e) {
             throw new RuntimeException(e);
@@ -126,23 +119,18 @@ public class DataFile {
     }
 
     //-----------------------------------------------------------------------
-    public void readVoteAndShow(String path){
+    public List<String> readVote(String path){
         file = new File(path);
         if(!file.exists()){
-            System.out.println("There are no comments for this product yet");
-            return;
+            return null;
         }
         List<String> list = new ArrayList<>();
         String s;
-        String [] ss;
         try(BufferedReader bufferedReader = new BufferedReader(new FileReader(path));){
             while((s = bufferedReader.readLine()) != null){
                 list.add(s);
             }
-            for(int i = list.size() - 1; i >= 0; i--){
-                ss = list.get(i).split(",");
-                System.out.println(ss[0] + ": " + ss[1] + " SAO -> " + ss[2]);
-            }
+            return list;
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

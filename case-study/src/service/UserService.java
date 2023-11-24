@@ -214,4 +214,13 @@ public class UserService {
         return null;
     }
 
+    public User checkShopExists(String accountName){
+        for (User user : RegisterAccount.getAccountShopList()){
+            if(user.getAccountName().equals(accountName)){
+                return user;
+            }
+        }
+        return null;
+    }
+
 }

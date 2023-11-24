@@ -220,7 +220,7 @@ public class DisPlay {
 
     //---------------------------------------------------------
 
-    public void  voteProduct(){
+    public void  voteProduct(User user){
         System.out.print("Product's ID that you want to vote: ");
         int id = sc.nextInt();
         sc.nextLine();
@@ -231,7 +231,7 @@ public class DisPlay {
         sc.nextLine();
         System.out.print("Comment: ");
         String comment = sc.nextLine();
-        UserController.getInstance().voteProduct(accountName, id, star, comment);
+        UserController.getInstance().voteProduct(accountName, id, star, comment, user);
     }
 
     public void showVoteProduct(){

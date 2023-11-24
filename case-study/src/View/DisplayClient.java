@@ -70,7 +70,7 @@ public class DisplayClient {
                         DisPlay.getInstance().checkMonneyInBankCard(client);
                         break;
                     case 13:
-                        DisPlay.getInstance().voteProduct();
+                        DisPlay.getInstance().voteProduct(client);
                         break;
                     case 14:
                         DisPlay.getInstance().showVoteProduct();

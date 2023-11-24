@@ -192,7 +192,7 @@ public class UserController {
     }
     //------------------------------------------------------------------
 
-    public void voteProduct(String accountName, int id, int star, String comment){
+    public void voteProduct(String accountName, int id, int star, String comment, User userComment){
         User user = UserService.getInstance().checkUserExists(accountName);
         if(user == null){
             System.out.println("This store is not available");
@@ -206,11 +206,11 @@ public class UserController {
         }
         String path = "C:\\Users\\DELL\\Desktop\\Java_CODEGYM-Module2\\case-study\\src\\my_File\\vote_product\\"
                 + accountName + "_" + id + ".csv";
-        DataFile.getInstance().writeVote(path, accountName, star, comment);
+        DataFile.getInstance().writeVote(path, star, comment, userComment);
         System.out.println("Comment Successfully");
     }
     public void showVoteProduct(String accountName, int id){
-        User user = UserService.getInstance().checkUserExists(accountName);
+        User user = UserService.getInstance().checkShopExists(accountName);
         if(user == null){
             System.out.println("This store is not available");
             return;
@@ -223,7 +223,18 @@ public class UserController {
         }
         String path = "C:\\Users\\DELL\\Desktop\\Java_CODEGYM-Module2\\case-study\\src\\my_File\\vote_product\\"
                 + accountName + "_" + id + ".csv";
-        DataFile.getInstance().readVoteAndShow(path);
+        List<String> listComment;
+        listComment = DataFile.getInstance().readVote(path);
+        if(listComment == null) {
+            System.out.println("There are no comments for this product yet");
+            return;
+        }
+        String [] ss;
+        for(int i = listComment.size() - 1; i >= 0; i--){
+            ss = listComment.get(i).split(",");
+            System.out.println(ss[0] + ": " + ss[1] + " SAO -> " + ss[2]);
+        }
+
     }
 
 }
