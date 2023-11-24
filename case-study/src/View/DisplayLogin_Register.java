@@ -13,10 +13,7 @@ public class DisplayLogin_Register {
         while(choose != 3) {
             DataFile.readClient();
             DataFile.readShop();
-            System.out.println("1. Resigter an account");
-            System.out.println("2. Login");
-            System.out.println("3. Exit");
-            System.out.print("Enter your choose: ");
+            DisPlay.getInstance().displayMenuRegister_Login();
             try{
                 choose = sc.nextInt();
 

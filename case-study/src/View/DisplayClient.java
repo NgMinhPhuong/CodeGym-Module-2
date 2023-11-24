@@ -12,8 +12,8 @@ public class DisplayClient {
     public static void display(String accountNameOfuser){
         {
             Scanner sc = new Scanner(System.in);
-            int choose1 = -1;
-            while(choose1 != 0)
+            int choose = -1;
+            while(choose != 0)
             {
                 Client client = null;
                 DataFile.readClient();
@@ -24,28 +24,15 @@ public class DisplayClient {
                         break;
                     }
                 }
-                System.out.println("                                          Welcome " + client.getAccountName() + "(Client)");
-                System.out.println("1: Add a Product To Basket");
-                System.out.println("2: Remove a Product To Basket");
-                System.out.println("3: Show my Basket");
-                System.out.println("4. Choose Method to Add Monney to Account");
-                System.out.println("5. Add Monney to Account");
-                System.out.println("6. Choose Method Payment");
-                System.out.println("7. Buy Product");
-                System.out.println("8. Connect To Another User");
-                System.out.println("9. Send A Message");
-                System.out.println("10. Read MailBox");
-                System.out.println("0. Log out");
-                System.out.print("Enter your choose: ");
+                DisPlay.getInstance().displayMenuClient(client);
                 try{
-                    choose1 = sc.nextInt();
+                    choose = sc.nextInt();
                 } catch (Exception e){
                     continue;
                 } finally {
                     sc.nextLine();
                 }
-                int id = 0;
-                switch (choose1){
+                switch (choose){
                     case 1:
                         DisPlay.getInstance().displayAddToBasket(client);
                         break;
@@ -53,16 +40,16 @@ public class DisplayClient {
                         DisPlay.getInstance().displayRemoveFromBasket(client);
                         break;
                     case 3:
-                        UserController.getInstance().showBasket(client);
+                        DisPlay.getInstance().showBasket(client);
                         break;
                     case 4:
-                        DisPlay.getInstance().displaySetMethodAddMonney(client);
+                        DisPlay.getInstance().displaySetAddMonneyMethod(client);
                         break;
                     case 5:
                         DisPlay.getInstance().displayAddMonney(client);
                         break;
                     case 6:
-                        DisPlay.getInstance().displaySetMethodPayment(client);
+                        DisPlay.getInstance().displaySetPaymentMethod(client);
                         break;
                     case 7:
                         DisPlay.getInstance().displayBuyProduct(client);
@@ -75,6 +62,12 @@ public class DisplayClient {
                         break;
                     case 10:
                         DisPlay.getInstance().displayReadMail(client);
+                        break;
+                    case 11:
+                        DisPlay.getInstance().checkMonneyInAccount(client);
+                        break;
+                    case 12:
+                        DisPlay.getInstance().checkMonneyInBankCard(client);
                         break;
                 }
                 System.out.println("------------------------------------------------------------");

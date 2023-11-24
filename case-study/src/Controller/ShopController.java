@@ -38,7 +38,4 @@ public class ShopController {
         System.out.println("In your Store has no this Id");
     }
 
-    public void showMyProduct(Shop shop){
-        ShopService.getInstance().showProductList(shop);
-    }
 }

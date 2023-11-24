@@ -90,9 +90,6 @@ public class UserController {
 
     //---------------------------------------------------------------------------
 
-    public void showBasket(User user) {
-        UserService.getInstance().showBasket(user);
-    }
 
     //----------------------------------------
     public void setPaymentMethod(String type, User user){
@@ -112,7 +109,7 @@ public class UserController {
         System.out.println("Type is Wrong. Type must be ('Bank' or 'Account')");
     }
 
-    //--------------------------------------------------------
+    //-----------------------------------------------------------
     public void pay(int id, int amount, String accountName, User userBuy) {
         if (userBuy.getPaymentMethod() == null) {
             System.out.println("Chose a PaymentMethod please");
@@ -182,12 +179,20 @@ public class UserController {
                 return;
             }
             UserService.getInstance().addMonneyToAccount(user, monney);
+            System.out.println("Add successfully");
             DataFile.writeShop();
             DataFile.writeClient();
         } else{
             UserService.getInstance().addMonneyToAccount(user, monney);
+            System.out.println("Add successfully");
             DataFile.writeShop();
             DataFile.writeClient();
         }
     }
+    //------------------------------------------------------------------
+
+    public void showCommentProduct(String accountName, int id){
+        for(accountName)
+    }
+
 }
