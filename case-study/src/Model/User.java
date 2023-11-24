@@ -107,14 +107,14 @@ public abstract class User implements Serializable {
     //-----------------------------------------------
     User checkExists(String accountName){
         User user = null;
-        DataFile.readClient();
+        DataFile.getInstance().readClient();
         for(User x : RegisterAccount.getAccountClientList()){
             if((x.accountName).equals(accountName)){
                 user = x;
                 return user;
             }
         }
-        DataFile.readShop();
+        DataFile.getInstance().readShop();
         for(User x : RegisterAccount.getAccountShopList()){
             if((x.accountName).equals(accountName)){
                 user = x;

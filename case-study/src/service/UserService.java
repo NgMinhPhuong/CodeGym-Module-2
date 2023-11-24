@@ -16,7 +16,6 @@ import java.util.Map;
 
 public class UserService {
     private static UserService instance;
-    private User user;
 
     private UserService() {
 
@@ -29,10 +28,7 @@ public class UserService {
         return instance;
     }
 
-    public User getUser() {
 
-        return user;
-    }
 
     //-------------------------------------------
 
@@ -41,14 +37,12 @@ public class UserService {
 
     User checkExists(String accountName) {
         User user = null;
-        DataFile.readClient();
         for (User x : RegisterAccount.getAccountClientList()) {
             if ((x.getAccountName()).equals(accountName)) {
                 user = x;
                 return user;
             }
         }
-        DataFile.readShop();
         for (User x : RegisterAccount.getAccountShopList()) {
             if ((x.getAccountName()).equals(accountName)) {
                 user = x;
@@ -204,5 +198,20 @@ public class UserService {
             }
     }
 
+    //--------------------------------------------------
+    public User checkUserExists(String accountName){
+        for (User user : RegisterAccount.getAccountClientList()){
+            if(user.getAccountName().equals(accountName)){
+                return user;
+            }
+        }
+
+        for (User user : RegisterAccount.getAccountShopList()){
+            if(user.getAccountName().equals(accountName)){
+                return user;
+            }
+        }
+        return null;
+    }
 
 }

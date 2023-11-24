@@ -1,7 +1,9 @@
 package service;
 
 import Model.Product;
+import Model.RegisterAccount;
 import Model.Shop;
+import Model.User;
 
 
 public class ShopService {
@@ -41,5 +43,16 @@ public class ShopService {
         }
         for(Product x : shop.getMyProductList()) System.out.println(x);
         System.out.println();
+    }
+
+    public Product checkIdExists(int id){
+        for (User user : RegisterAccount.getAccountShopList()) {
+            for (Product x : ((Shop) user).getMyProductList()) {
+                if (x.getId() == id) {
+                    return x;
+                }
+            }
+        }
+        return null;
     }
 }

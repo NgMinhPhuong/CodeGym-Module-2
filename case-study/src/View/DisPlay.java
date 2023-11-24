@@ -169,6 +169,8 @@ public class DisPlay {
         System.out.println("10. Read MailBox");
         System.out.println("11. Check Your Account");
         System.out.println("12. Check your BankCard");
+        System.out.println("13. Vote A Product");
+        System.out.println("14. Show Vote About Product");
         System.out.println("0. Log out");
         System.out.print("Enter your choose: ");
     }
@@ -191,6 +193,8 @@ public class DisPlay {
         System.out.println("13. Read MailBox");
         System.out.println("14. Check Your Account");
         System.out.println("15. Check your BankCard");
+        System.out.println("16. Vote A Product");
+        System.out.println("17. Show Vote About Product");
         System.out.println("0. Log out");
         System.out.print("Enter your choose: ");
     }
@@ -215,13 +219,28 @@ public class DisPlay {
     }
 
     //---------------------------------------------------------
-    public void showCommentProduct(){
+
+    public void  voteProduct(){
+        System.out.print("Product's ID that you want to vote: ");
+        int id = sc.nextInt();
+        sc.nextLine();
+        System.out.print("At Shop with AccountName: ");
+        String accountName = sc.nextLine();
+        System.out.print("The Numbers of star: ");
+        int star = sc.nextInt();
+        sc.nextLine();
+        System.out.print("Comment: ");
+        String comment = sc.nextLine();
+        UserController.getInstance().voteProduct(accountName, id, star, comment);
+    }
+
+    public void showVoteProduct(){
         System.out.print("Enter product's Id that you want to see: ");
         int id = sc.nextInt();
         sc.nextLine();
         System.out.print("At Shop with AccountName: ");
         String accountName = sc.nextLine();
-        UserController.getInstance().showCommentProduct(accountName, id);
+        UserController.getInstance().showVoteProduct(accountName, id);
     }
 }
 

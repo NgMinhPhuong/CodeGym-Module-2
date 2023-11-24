@@ -14,8 +14,8 @@ public class DisplayShop {
         while(choose1 != 0)
         {
             Shop shop = null;
-            DataFile.readShop();
-            DataFile.readClient();
+            DataFile.getInstance().readShop();
+            DataFile.getInstance().readClient();
             for(User x : RegisterAccount.getAccountShopList()){
                 if(x.getAccountName().equals(accountNameOfuser)){
                     shop = (Shop) x;
@@ -78,9 +78,10 @@ public class DisplayShop {
                     DisPlay.getInstance().checkMonneyInBankCard(shop);
                     break;
                 case 16:
-
+                    DisPlay.getInstance().voteProduct();
                     break;
                 case 17:
+                    DisPlay.getInstance().showVoteProduct();
                     break;
             }
             System.out.println("------------------------------------------------------------");

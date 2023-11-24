@@ -11,8 +11,8 @@ public class DisplayLogin_Register {
         Scanner sc = new Scanner(System.in);
         int choose = -1;
         while(choose != 3) {
-            DataFile.readClient();
-            DataFile.readShop();
+            DataFile.getInstance().readClient();
+            DataFile.getInstance().readShop();
             DisPlay.getInstance().displayMenuRegister_Login();
             try{
                 choose = sc.nextInt();

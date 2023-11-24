@@ -16,8 +16,8 @@ public class DisplayClient {
             while(choose != 0)
             {
                 Client client = null;
-                DataFile.readClient();
-                DataFile.readShop();
+                DataFile.getInstance().readClient();
+                DataFile.getInstance().readShop();
                 for(User x : RegisterAccount.getAccountClientList()){
                     if(x.getAccountName().equals(accountNameOfuser)){
                         client = (Client) x;
@@ -68,6 +68,12 @@ public class DisplayClient {
                         break;
                     case 12:
                         DisPlay.getInstance().checkMonneyInBankCard(client);
+                        break;
+                    case 13:
+                        DisPlay.getInstance().voteProduct();
+                        break;
+                    case 14:
+                        DisPlay.getInstance().showVoteProduct();
                         break;
                 }
                 System.out.println("------------------------------------------------------------");

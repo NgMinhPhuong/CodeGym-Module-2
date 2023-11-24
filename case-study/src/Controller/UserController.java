@@ -2,6 +2,7 @@ package Controller;
 
 import Model.AddByBank;
 import Model.AddByPhoneCard;
+import service.ShopService;
 import service.UserService;
 import untils.DataFile;
 import Model.PayByAccount;
@@ -49,8 +50,8 @@ public class UserController {
                 product = new Product(product);
                 UserService.getInstance().addIntoBasket(userAdd ,product, accountName);
                 System.out.println("Add successfully");
-                DataFile.writeClient();
-                DataFile.writeShop();
+                DataFile.getInstance().writeClient();
+                DataFile.getInstance().writeShop();
                 return;
             }
         }
@@ -79,8 +80,8 @@ public class UserController {
                 if(product.getId() == id){
                     UserService.getInstance().removeFromBasket(userRemove, id, accountName);
                     System.out.println("Remove from your Basket successfully");
-                    DataFile.writeClient();
-                    DataFile.writeShop();
+                    DataFile.getInstance().writeClient();
+                    DataFile.getInstance().writeShop();
                     return;
                 }
             }
@@ -96,14 +97,14 @@ public class UserController {
         if (type.equals("Bank")) {
             user.setPaymentMethod(new PayByCard());
             System.out.println("Selected !");
-            DataFile.writeShop();
-            DataFile.writeClient();
+            DataFile.getInstance().writeShop();
+            DataFile.getInstance().writeClient();
             return;
         } else if (type.equals("Account")) {
             user.setPaymentMethod(new PayByAccount());
             System.out.println("Selected !");
-            DataFile.writeShop();
-            DataFile.writeClient();
+            DataFile.getInstance().writeShop();
+            DataFile.getInstance().writeClient();
             return;
         }
         System.out.println("Type is Wrong. Type must be ('Bank' or 'Account')");
@@ -146,8 +147,8 @@ public class UserController {
             return;
         }
         UserService.getInstance().pay(product, amount, userBuy, userSell);
-        DataFile.writeClient();
-        DataFile.writeShop();
+        DataFile.getInstance().writeClient();
+        DataFile.getInstance().writeShop();
     }
 
     //-------------------------------------------------------------
@@ -155,14 +156,14 @@ public class UserController {
         if (type.equals("Bank")) {
             user.setAddMoneyMethod(new AddByBank());
             System.out.println("Selected !");
-            DataFile.writeShop();
-            DataFile.writeClient();
+            DataFile.getInstance().writeShop();
+            DataFile.getInstance().writeClient();
             return;
         } else if (type.equals("PhoneCard")) {
             user.setAddMoneyMethod(new AddByPhoneCard());
             System.out.println("Selected !");
-            DataFile.writeShop();
-            DataFile.writeClient();
+            DataFile.getInstance().writeShop();
+            DataFile.getInstance().writeClient();
             return;
         }
         System.out.println("Type is Wrong. Type must be ('Bank' or 'PhoneCard')");
@@ -180,19 +181,49 @@ public class UserController {
             }
             UserService.getInstance().addMonneyToAccount(user, monney);
             System.out.println("Add successfully");
-            DataFile.writeShop();
-            DataFile.writeClient();
+            DataFile.getInstance().writeShop();
+            DataFile.getInstance().writeClient();
         } else{
             UserService.getInstance().addMonneyToAccount(user, monney);
             System.out.println("Add successfully");
-            DataFile.writeShop();
-            DataFile.writeClient();
+            DataFile.getInstance().writeShop();
+            DataFile.getInstance().writeClient();
         }
     }
     //------------------------------------------------------------------
 
-    public void showCommentProduct(String accountName, int id){
-        for(accountName)
+    public void voteProduct(String accountName, int id, int star, String comment){
+        User user = UserService.getInstance().checkUserExists(accountName);
+        if(user == null){
+            System.out.println("This store is not available");
+            return;
+        }
+
+        Product product = ShopService.getInstance().checkIdExists(id);
+        if (product == null){
+            System.out.println("This store has no this ID");
+            return;
+        }
+        String path = "C:\\Users\\DELL\\Desktop\\Java_CODEGYM-Module2\\case-study\\src\\my_File\\vote_product\\"
+                + accountName + "_" + id + ".csv";
+        DataFile.getInstance().writeVote(path, accountName, star, comment);
+        System.out.println("Comment Successfully");
+    }
+    public void showVoteProduct(String accountName, int id){
+        User user = UserService.getInstance().checkUserExists(accountName);
+        if(user == null){
+            System.out.println("This store is not available");
+            return;
+        }
+
+        Product product = ShopService.getInstance().checkIdExists(id);
+        if (product == null){
+            System.out.println("This store has no this ID");
+            return;
+        }
+        String path = "C:\\Users\\DELL\\Desktop\\Java_CODEGYM-Module2\\case-study\\src\\my_File\\vote_product\\"
+                + accountName + "_" + id + ".csv";
+        DataFile.getInstance().readVoteAndShow(path);
     }
 
 }
