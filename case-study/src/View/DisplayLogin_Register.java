@@ -1,6 +1,7 @@
 package View;
 
 import Controller.Register_LoginController;
+import Menu.Menu;
 import Model.User;
 import untils.DataFile;
 
@@ -13,7 +14,7 @@ public class DisplayLogin_Register {
         while(choose != 3) {
             DataFile.getInstance().readClient();
             DataFile.getInstance().readShop();
-            DisPlay.getInstance().displayMenuRegister_Login();
+            Menu.getInstance().displayMenuRegister_Login();
             try{
                 choose = sc.nextInt();
 

@@ -53,6 +53,4 @@ Shop extends User implements Serializable {
 
     //----------------------------------------
 
-
-
 }

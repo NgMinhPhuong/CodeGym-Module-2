@@ -35,7 +35,7 @@ public class Register_LoginService {
 
     //-------------------------------------------------------------------------
 
-    public static void resigter(User user) {
+    public void resigter(User user) {
         User newUser = user;
         if(newUser instanceof Shop) {
             RegisterAccount.getAccountShopList().add(newUser);

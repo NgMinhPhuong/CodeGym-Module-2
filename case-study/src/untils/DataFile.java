@@ -13,6 +13,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.io.OutputStreamWriter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -108,7 +109,7 @@ public class DataFile {
             }
         }
         list.add(userComment.getAccountName() + "," + star + "," + comment );
-        try(BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(path));){
+        try(BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(path),"UTF-8"));){
             for(String str : list){
                 bufferedWriter.write(str);
                 bufferedWriter.newLine();

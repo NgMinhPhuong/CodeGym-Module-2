@@ -1,6 +1,7 @@
 package View;
 
 import Controller.UserController;
+import Menu.Menu;
 import Model.Client;
 import untils.DataFile;
 import Model.RegisterAccount;
@@ -24,7 +25,7 @@ public class DisplayClient {
                         break;
                     }
                 }
-                DisPlay.getInstance().displayMenuClient(client);
+                Menu.getInstance().displayMenuClient(client);
                 try{
                     choose = sc.nextInt();
                 } catch (Exception e){
@@ -75,6 +76,10 @@ public class DisplayClient {
                     case 14:
                         DisPlay.getInstance().showVoteProduct();
                         break;
+                    case 15:
+                        DisPlay.getInstance().showTransactionHistory(client);
+                        break;
+
                 }
                 System.out.println("------------------------------------------------------------");
             }

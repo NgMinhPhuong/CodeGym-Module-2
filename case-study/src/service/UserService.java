@@ -2,6 +2,7 @@ package service;
 
 import Model.Product;
 import Model.RegisterAccount;
+import Model.Shop;
 import Model.User;
 import untils.DataFile;
 
@@ -10,6 +11,8 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -167,7 +170,7 @@ public class UserService {
         for (Product product : tmp) {
             if (product.getId() == id) {
                 userRemove.getBasket().get(accountName).remove(product);
-                if (tmp.size() == 0) {
+                if (tmp.isEmpty()) {
                     userRemove.getBasket().remove(accountName);
                 }
                 return;
@@ -175,7 +178,7 @@ public class UserService {
         }
     }
     public void showBasket(User userShow){
-        if(userShow.getBasket().size() == 0){
+        if(userShow.getBasket().isEmpty()){
             System.out.println("Basket is empty");
             return;
         }
@@ -184,10 +187,49 @@ public class UserService {
             for (Product product : map.getValue()){
                 System.out.println("         " + product);
             }
+            System.out.println();
         }
     }
     public void pay(Product product, int amount, User userBuy, User userSell) {
         userBuy.getPaymentMethod().pay(product, amount, userBuy, userSell);
+        int id = product.getId();
+        if(product.getAmount() == 0){
+            for(Product x : ((Shop) userSell).getMyProductList()){
+                if(product.getId() == x.getId()){
+                    ((Shop) userSell).getMyProductList().remove(x);
+                    break;
+                }
+            }
+        }
+
+        LocalTime localTime = LocalTime.now().truncatedTo(java.time.temporal.ChronoUnit.SECONDS);
+        LocalDate localDate = LocalDate.now();
+        String buy = localDate.toString() + "   " + localTime.toString() + " Bought " + amount + " " + product.getName() +
+                "(ID: " + product.getId() + ") at the Shop with AccountName: " + userSell.getAccountName() + " (" + userSell.getUserName() + ")";
+        String sell = localDate.toString() + "   " + localTime.toString() + " Sold " + amount + " " + product.getName() +
+                "(ID: " + product.getId() + ") to Account Name: " + userBuy.getAccountName() + " (" + userBuy.getUserName() + ")";
+
+        userBuy.getTransactionHistory().add(buy);
+        userSell.getTransactionHistory().add(sell);
+        List<Product> tmp = userBuy.getBasket().get(userSell.getAccountName());
+        if (tmp == null) {
+            System.out.println("Payment success");
+            return;
+        }
+        for(Product x : tmp){
+            if(x.getId() == id){
+                x.setAmount(x.getAmount() - amount);
+                if(x.getAmount() == 0){
+                    tmp.remove(x);
+                    if(tmp.isEmpty()) {
+                        userBuy.getBasket().remove(userSell.getAccountName());
+                    }
+                    break;
+                }
+                break;
+            }
+        }
+        System.out.println("Payment success");
     }
 
     public void addMonneyToAccount(User user, double monney){
@@ -223,4 +265,14 @@ public class UserService {
         return null;
     }
 
+    public void showTransactionHistory(User user){
+        if(user.getTransactionHistory().isEmpty()){
+            System.out.println("Your Transaction is empty");
+            return;
+        }
+        List<String> list = user.getTransactionHistory();
+        for(int i = list.size() - 1; i >= 0; i--){
+            System.out.println(list.get(i));
+        }
+    }
 }

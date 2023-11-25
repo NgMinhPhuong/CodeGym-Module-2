@@ -62,10 +62,10 @@ public class Register_LoginController {
         }
 
         if(type.equals("Shop")){
-            Register_LoginService.resigter(new Shop(userName, accountName, password));
+            Register_LoginService.getInstance().resigter(new Shop(userName, accountName, password));
             DataFile.getInstance().writeShop();
         } else{
-            Register_LoginService.resigter(new Client(userName, accountName, password));
+            Register_LoginService.getInstance().resigter(new Client(userName, accountName, password));
             DataFile.getInstance().writeClient();
         }
         System.out.println("Resigter successfully");

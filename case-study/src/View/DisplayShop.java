@@ -1,5 +1,6 @@
 package View;
 
+import Menu.Menu;
 import untils.DataFile;
 import Model.RegisterAccount;
 import Model.Shop;
@@ -22,7 +23,7 @@ public class DisplayShop {
                     break;
                 }
             }
-            DisPlay.getInstance().displayMenuShop(shop);
+            Menu.getInstance().displayMenuShop(shop);
             try{
                 choose1 = sc.nextInt();
             } catch (Exception e){
@@ -30,7 +31,6 @@ public class DisplayShop {
             } finally {
                 sc.nextLine();
             }
-            int id = 0;
             switch (choose1){
                 case 1:
                     DisPlay.getInstance().displayAddToBasket(shop);
@@ -82,6 +82,12 @@ public class DisplayShop {
                     break;
                 case 17:
                     DisPlay.getInstance().showVoteProduct();
+                    break;
+                case 18:
+                    DisPlay.getInstance().showRevenue(shop);
+                    break;
+                case 19:
+                    DisPlay.getInstance().showTransactionHistory(shop);
                     break;
             }
             System.out.println("------------------------------------------------------------");
