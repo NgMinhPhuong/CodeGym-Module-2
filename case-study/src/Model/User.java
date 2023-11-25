@@ -21,7 +21,6 @@ public abstract class User implements Serializable {
     private double account = 0;
     private double bankCard = 1000000;
     private Map<String, List<Product>> basket = new HashMap<>();
-    private List<Product> listValueMap = new ArrayList<>();
 
     private List<String> transactionHistory = new ArrayList<>();
 
@@ -66,9 +65,6 @@ public abstract class User implements Serializable {
         return basket;
     }
 
-    public List<Product> getListValueMap() {
-        return listValueMap;
-    }
 
     public List<String> getTransactionHistory() {
         return transactionHistory;
@@ -110,9 +106,6 @@ public abstract class User implements Serializable {
         this.basket = basket;
     }
 
-    public void setListValueMap(List<Product> listValueMap) {
-        this.listValueMap = listValueMap;
-    }
 
 
     public void setTransactionHistory(List<String> transactionHistory) {

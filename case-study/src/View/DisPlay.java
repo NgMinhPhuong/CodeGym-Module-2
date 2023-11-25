@@ -201,5 +201,11 @@ public class DisPlay {
     public void showTransactionHistory(User user){
         UserService.getInstance().showTransactionHistory(user);
     }
+
+    public void displayFindProduct(){
+        System.out.print("The name of Product: ");
+        String productName = sc.nextLine();
+        UserService.getInstance().findProduct(productName);
+    }
 }
 

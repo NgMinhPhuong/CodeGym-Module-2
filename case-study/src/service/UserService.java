@@ -204,9 +204,9 @@ public class UserService {
 
         LocalTime localTime = LocalTime.now().truncatedTo(java.time.temporal.ChronoUnit.SECONDS);
         LocalDate localDate = LocalDate.now();
-        String buy = localDate.toString() + "   " + localTime.toString() + " Bought " + amount + " " + product.getName() +
+        String buy = localDate + "   " + localTime.toString() + "   Bought " + amount + " " + product.getName() +
                 "(ID: " + product.getId() + ") at the Shop with AccountName: " + userSell.getAccountName() + " (" + userSell.getUserName() + ")";
-        String sell = localDate.toString() + "   " + localTime.toString() + " Sold " + amount + " " + product.getName() +
+        String sell = localDate + "   " + localTime.toString() + "   Sold " + amount + " " + product.getName() +
                 "(ID: " + product.getId() + ") to Account Name: " + userBuy.getAccountName() + " (" + userBuy.getUserName() + ")";
 
         userBuy.getTransactionHistory().add(buy);
@@ -273,6 +273,21 @@ public class UserService {
         List<String> list = user.getTransactionHistory();
         for(int i = list.size() - 1; i >= 0; i--){
             System.out.println(list.get(i));
+        }
+    }
+
+    public void findProduct(String productName){
+        int cnt = 0;
+        for(User user : RegisterAccount.getAccountShopList()){
+           for(Product product : ((Shop)(user)).getMyProductList()){
+               if(product.getName().contains(productName)){
+                   System.out.println(user.getAccountName() + ":  " + product);
+                   cnt++;
+               }
+           }
+        }
+        if(cnt == 0){
+            System.out.println("There is no Product with " + "'" + productName + "'");
         }
     }
 }

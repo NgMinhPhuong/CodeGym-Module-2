@@ -63,30 +63,33 @@ public class DisplayShop {
                    DisPlay.getInstance().displayBuyProduct(shop);
                     break;
                 case 11:
-                    DisPlay.getInstance().displayConnectAccount(shop);
+                    DisPlay.getInstance().displayFindProduct();
                     break;
                 case 12:
-                    DisPlay.getInstance().displaySendMessage(shop);
+                    DisPlay.getInstance().displayConnectAccount(shop);
                     break;
                 case 13:
-                    DisPlay.getInstance().displayReadMail(shop);
+                    DisPlay.getInstance().displaySendMessage(shop);
                     break;
                 case 14:
-                    DisPlay.getInstance().checkMonneyInAccount(shop);
+                    DisPlay.getInstance().displayReadMail(shop);
                     break;
                 case 15:
-                    DisPlay.getInstance().checkMonneyInBankCard(shop);
+                    DisPlay.getInstance().checkMonneyInAccount(shop);
                     break;
                 case 16:
-                    DisPlay.getInstance().voteProduct(shop);
+                    DisPlay.getInstance().checkMonneyInBankCard(shop);
                     break;
                 case 17:
-                    DisPlay.getInstance().showVoteProduct();
+                    DisPlay.getInstance().voteProduct(shop);
                     break;
                 case 18:
-                    DisPlay.getInstance().showRevenue(shop);
+                    DisPlay.getInstance().showVoteProduct();
                     break;
                 case 19:
+                    DisPlay.getInstance().showRevenue(shop);
+                    break;
+                case 20:
                     DisPlay.getInstance().showTransactionHistory(shop);
                     break;
             }

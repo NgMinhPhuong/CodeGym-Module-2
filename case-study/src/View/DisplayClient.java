@@ -56,27 +56,30 @@ public class DisplayClient {
                         DisPlay.getInstance().displayBuyProduct(client);
                         break;
                     case 8:
-                        DisPlay.getInstance().displayConnectAccount(client);
+                        DisPlay.getInstance().displayFindProduct();
                         break;
                     case 9:
-                        DisPlay.getInstance().displaySendMessage(client);
+                        DisPlay.getInstance().displayConnectAccount(client);
                         break;
                     case 10:
-                        DisPlay.getInstance().displayReadMail(client);
+                        DisPlay.getInstance().displaySendMessage(client);
                         break;
                     case 11:
-                        DisPlay.getInstance().checkMonneyInAccount(client);
+                        DisPlay.getInstance().displayReadMail(client);
                         break;
                     case 12:
+                        DisPlay.getInstance().checkMonneyInAccount(client);
+                        break;
+                    case 123:
                         DisPlay.getInstance().checkMonneyInBankCard(client);
                         break;
-                    case 13:
+                    case 14:
                         DisPlay.getInstance().voteProduct(client);
                         break;
-                    case 14:
+                    case 15:
                         DisPlay.getInstance().showVoteProduct();
                         break;
-                    case 15:
+                    case 16:
                         DisPlay.getInstance().showTransactionHistory(client);
                         break;
 
