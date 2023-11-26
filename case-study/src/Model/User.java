@@ -24,6 +24,8 @@ public abstract class User implements Serializable {
 
     private List<String> transactionHistory = new ArrayList<>();
 
+    private int cntBlock = 0;
+
 
 
     //------------------------------------------------------
@@ -70,6 +72,9 @@ public abstract class User implements Serializable {
         return transactionHistory;
     }
 
+    public int getCntBlock() {
+        return cntBlock;
+    }
 
     //------------------------------------------
 
@@ -107,12 +112,15 @@ public abstract class User implements Serializable {
     }
 
 
-
     public void setTransactionHistory(List<String> transactionHistory) {
         this.transactionHistory = transactionHistory;
     }
 
-    //-----------------------------------------------
+    public void setCntBlock(int cntBlock) {
+        this.cntBlock = cntBlock;
+    }
+
+    //----------------------------------------------------------------------------------------------
     User checkExists(String accountName){
         User user = null;
         DataFile.getInstance().readClient();

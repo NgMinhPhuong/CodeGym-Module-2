@@ -171,24 +171,19 @@ public class UserController {
 
     public void addMonneyToAccount(double monney, User user){
         if(user.getAddMoneyMethod() == null){
-            System.out.println("Please a Method to Add Monney");
+            System.out.println("Please Choose a Method to Add Monney");
             return;
         }
-        if(user.getAddMoneyMethod() instanceof AddByBank){
-            if(monney > user.getBankCard()){
-                System.out.println("Your cardAccount is not enough monney");
+        if(user.getAddMoneyMethod() instanceof AddByBank) {
+            if (monney > user.getBankCard()) {
+                System.out.println("Your BankAccount is not enough monney");
                 return;
             }
-            UserService.getInstance().addMonneyToAccount(user, monney);
-            System.out.println("Add successfully");
-            DataFile.getInstance().writeShop();
-            DataFile.getInstance().writeClient();
-        } else{
-            UserService.getInstance().addMonneyToAccount(user, monney);
-            System.out.println("Add successfully");
-            DataFile.getInstance().writeShop();
-            DataFile.getInstance().writeClient();
         }
+            UserService.getInstance().addMonneyToAccount(user, monney);
+            System.out.println("Add successfully");
+            DataFile.getInstance().writeShop();
+            DataFile.getInstance().writeClient();
     }
     //------------------------------------------------------------------
 

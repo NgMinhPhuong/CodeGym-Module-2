@@ -2,7 +2,9 @@ package Main;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 
 public class test1 implements Serializable {
     int data = 2;
@@ -17,12 +19,13 @@ public class test1 implements Serializable {
         return name + "  " + data;
     }
     public static void main(String[] args) {
-        LocalTime localTime = LocalTime.now().truncatedTo(java.time.temporal.ChronoUnit.SECONDS);
-        System.out.println(localTime);
-        LocalDate localDate = LocalDate.now();
-        String e = localDate + "534";
-        System.out.println(e);
+        System.out.println("cc");
+        LocalDateTime a = LocalDateTime.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
+        LocalDateTime after = a.plusHours(6);
+        System.out.println(a.format(formatter));
+        System.out.println(after);
 
-
+/////// Làm mở tài khoản khi hết thời gian khoá
     }
 }

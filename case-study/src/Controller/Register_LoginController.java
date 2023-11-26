@@ -7,6 +7,8 @@ import Model.RegisterAccount;
 import Model.Shop;
 import Model.User;
 
+import java.util.List;
+
 public class Register_LoginController {
     private static Register_LoginController instance;
     private Register_LoginController(){
@@ -22,16 +24,25 @@ public class Register_LoginController {
     //--------------------------------------------------------------
 
     public User login(String accountName, String password) {
+        List<String[]> list = DataFile.getInstance().readBlockAccount();
+        for(int i = 0; i < list.size(); i++){
+            if(list.get(i)[0].equals(accountName)){
+                System.out.println("Your account is locked until " + list.get(i)[1]);
+                return null;
+            }
+        }
+
         User user = Register_LoginService.getInstance().login(accountName, password);
         if(user instanceof Client) {
-                System.out.println("Login successfully. Welcome My Client " + user.getUserName());
-                return user;
+            System.out.println("Login successfully. Welcome My Client " + user.getUserName());
+            return user;
         }
         if(user instanceof Shop) {
-                System.out.println("Login successfully. Welcome My Shop " + user.getUserName());
-                return user;
+            System.out.println("Login successfully. Welcome My Shop " + user.getUserName());
+            return user;
         }
-        System.out.println("Wrong Account or Password. Please Enter Again!");
+        DataFile.getInstance().writeClient();
+        DataFile.getInstance().writeShop();
         return null;
     }
 
@@ -44,9 +55,13 @@ public class Register_LoginController {
         }
         if(accountName.length() > 15 || !accountName.matches(RegisterAccount.REGEX))
         {
-            System.out.println("The string must contain letters and numbers and no more than 15 characters");
+            System.out.println("The Account Name must contain letters and numbers and no more than 15 characters");
             return;
         }
+
+//        if(!password.matches("")){
+//
+//        }
         for(User user : RegisterAccount.getAccountShopList()){
             if((user.getAccountName()).equals(accountName)){
                 System.out.println("Account Name already exists");

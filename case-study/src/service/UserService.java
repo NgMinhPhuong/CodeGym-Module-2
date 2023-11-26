@@ -233,11 +233,7 @@ public class UserService {
     }
 
     public void addMonneyToAccount(User user, double monney){
-            if(user.getAddMoneyMethod() == null){
-                System.out.println("Chose Add Method Please");
-            } else{
                 user.getAddMoneyMethod().add(user, monney);
-            }
     }
 
     //--------------------------------------------------
