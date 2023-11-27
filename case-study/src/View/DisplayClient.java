@@ -1,6 +1,5 @@
 package View;
 
-import Controller.UserController;
 import Menu.Menu;
 import Model.Client;
 import untils.DataFile;
@@ -74,15 +73,20 @@ public class DisplayClient {
                         DisPlay.getInstance().checkMonneyInBankCard(client);
                         break;
                     case 14:
-                        DisPlay.getInstance().voteProduct(client);
+                        DisPlay.getInstance().displayVoteProduct(client);
                         break;
                     case 15:
-                        DisPlay.getInstance().showVoteProduct();
+                        DisPlay.getInstance().displayShowVoteProduct();
                         break;
                     case 16:
-                        DisPlay.getInstance().showTransactionHistory(client);
+                        DisPlay.getInstance().displayTransactionHistory(client);
                         break;
-
+                    case 17:
+                        DisPlay.getInstance().displayUpdateInformation(client);
+                        break;
+                    case 18:
+                        DisPlay.getInstance().displayChangePassword(client);
+                        break;
                 }
                 System.out.println("------------------------------------------------------------");
             }

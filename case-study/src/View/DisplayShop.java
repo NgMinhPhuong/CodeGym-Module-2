@@ -81,16 +81,22 @@ public class DisplayShop {
                     DisPlay.getInstance().checkMonneyInBankCard(shop);
                     break;
                 case 17:
-                    DisPlay.getInstance().voteProduct(shop);
+                    DisPlay.getInstance().displayVoteProduct(shop);
                     break;
                 case 18:
-                    DisPlay.getInstance().showVoteProduct();
+                    DisPlay.getInstance().displayShowVoteProduct();
                     break;
                 case 19:
-                    DisPlay.getInstance().showRevenue(shop);
+                    DisPlay.getInstance().displayRevenue(shop);
                     break;
                 case 20:
-                    DisPlay.getInstance().showTransactionHistory(shop);
+                    DisPlay.getInstance().displayTransactionHistory(shop);
+                    break;
+                case 21:
+                    DisPlay.getInstance().displayUpdateInformation(shop);
+                    break;
+                case 22:
+                    DisPlay.getInstance().displayChangePassword(shop);
                     break;
             }
             System.out.println("------------------------------------------------------------");

@@ -5,6 +5,7 @@ import Controller.ShopController;
 import Controller.UserController;
 import Model.Shop;
 import Model.User;
+import final_REGEX.Const;
 import service.ShopService;
 import service.UserService;
 
@@ -170,7 +171,7 @@ public class DisPlay {
 
     //---------------------------------------------------------
 
-    public void  voteProduct(User user){
+    public void displayVoteProduct(User user){
         System.out.print("Product's ID that you want to vote: ");
         int id = sc.nextInt();
         sc.nextLine();
@@ -184,7 +185,7 @@ public class DisPlay {
         UserController.getInstance().voteProduct(accountName, id, star, comment, user);
     }
 
-    public void showVoteProduct(){
+    public void displayShowVoteProduct(){
         System.out.print("Enter product's Id that you want to see: ");
         int id = sc.nextInt();
         sc.nextLine();
@@ -193,12 +194,12 @@ public class DisPlay {
         UserController.getInstance().showVoteProduct(accountName, id);
     }
 
-    public void showRevenue(Shop shop){
+    public void displayRevenue(Shop shop){
         System.out.print("Your Shop's Revenue is: ");
         System.out.println(shop.getRevenue());
     }
 
-    public void showTransactionHistory(User user){
+    public void displayTransactionHistory(User user){
         UserService.getInstance().showTransactionHistory(user);
     }
 
@@ -206,6 +207,42 @@ public class DisPlay {
         System.out.print("The name of Product: ");
         String productName = sc.nextLine();
         UserService.getInstance().findProduct(productName);
+    }
+
+    public void displayUpdateInformation(User user){
+        System.out.print("Email: ");
+        String email = sc.nextLine();
+        System.out.print("Phone Number: ");
+        String phoneNumber = sc.nextLine();
+        UserController.getInstance().updateInformation(email, phoneNumber, user);
+    }
+
+    public void displayChangePassword(User user){
+        System.out.print("Old Password: ");
+        String oldPassword = sc.nextLine();
+        System.out.print("New password: ");
+        String newPassword = sc.nextLine();
+        System.out.print("Enter New Password again: ");
+        String againNewPassword = sc.nextLine();
+        UserController.getInstance().changePassword(oldPassword, newPassword, againNewPassword, user);
+    }
+
+    public void flowText(String name){
+        String redColor = "\u001B[31m";
+        String greenColor = "\u001B[32m";
+        String defaultColor = "\u001B[0m";
+        String yellowColor = "\\u001B[43m";
+        String blank = " ";
+        int cnt = 0;
+        while(true){
+            String s = " ";
+            for(int i = 0; i < 143 - name.length(); i++){
+                s += " ";
+            }
+            s += name;
+            System.out.println(yellowColor + s);
+            cnt++;
+        }
     }
 }
 

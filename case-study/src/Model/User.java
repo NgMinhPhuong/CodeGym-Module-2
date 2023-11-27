@@ -1,6 +1,5 @@
 package Model;
 import untils.DataFile;
-
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -26,7 +25,9 @@ public abstract class User implements Serializable {
 
     private int cntBlock = 0;
 
+    private String email;
 
+    private String phoneNumber;
 
     //------------------------------------------------------
     public User(String userName, String accountName, String password) {
@@ -76,6 +77,14 @@ public abstract class User implements Serializable {
         return cntBlock;
     }
 
+    public String getEmail() {
+        return email;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
     //------------------------------------------
 
 
@@ -118,6 +127,14 @@ public abstract class User implements Serializable {
 
     public void setCntBlock(int cntBlock) {
         this.cntBlock = cntBlock;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
     }
 
     //----------------------------------------------------------------------------------------------

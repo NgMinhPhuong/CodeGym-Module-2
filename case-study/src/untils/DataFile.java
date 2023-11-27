@@ -150,20 +150,16 @@ public class DataFile {
                 ss = s.split(",");
                 list.add(ss);
             }
+
             return list;
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
 
-    public void writeBlockAccount(String accountName){
+    public void writeBlockAccount(List<String[]> list){
         String path = "C:\\Users\\DELL\\Desktop\\Java_CODEGYM-Module2\\case-study\\src\\my_File\\BlackList.csv";
         try(BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(path));){
-            List<String[]> list = readBlockAccount();
-            LocalDateTime localDateTime = LocalDateTime.now();
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
-            String [] ss = {accountName,localDateTime.plusHours(12).format(formatter)};
-            list.add(ss);
             for(String [] x : list){
                 bufferedWriter.write(x[0] + "," + x[1] + "\n");
             }

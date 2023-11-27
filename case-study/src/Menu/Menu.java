@@ -16,7 +16,9 @@ public class Menu {
     }
 
     public void displayMenuClient(User user){
-        System.out.println("                                          Welcome " + user.getAccountName() + "(Client)");
+        String defaultColor = "\u001B[0m";
+        String yellowColor = "\u001B[34m";
+        System.out.println("                                          " + yellowColor + "Welcome "  + user.getAccountName() + "(Client)" + defaultColor);
         System.out.println("1: Add a Product To Basket");
         System.out.println("2: Remove a Product To Basket");
         System.out.println("3: Show my Basket");
@@ -33,13 +35,17 @@ public class Menu {
         System.out.println("14. Vote A Product");
         System.out.println("15. Show Vote About Product");
         System.out.println("16. Show Transaction History");
+        System.out.println("17. Update Personal Information");
+        System.out.println("18. Change Password");
         System.out.println("0. Log out");
         System.out.print("Enter your choose: ");
     }
 
 
     public void displayMenuShop(User user){
-        System.out.println("                                          Welcome " + user.getAccountName() + "(Shop)");
+        String defaultColor = "\u001B[0m";
+        String yellowColor = "\\u001B[34m";
+        System.out.println("                                          " + yellowColor + "Welcome "  + user.getAccountName() + "(Client)" + defaultColor);
         System.out.println("1: Add a Product To Basket");
         System.out.println("2: Remove a Product To Basket");
         System.out.println("3: Show my Basket");
@@ -60,6 +66,8 @@ public class Menu {
         System.out.println("18. Show Vote About Product");
         System.out.println("19. Show The  revenue of My Shop");
         System.out.println("20. Show Transaction History");
+        System.out.println("21. Update Personal Information");
+        System.out.println("22. Change Password");
         System.out.println("0. Log out");
         System.out.print("Enter your choose: ");
     }
@@ -72,3 +80,45 @@ public class Menu {
         System.out.print("Enter your choose: ");
     }
 }
+//    Màu đen: \u001B[30m
+//
+//        Màu đỏ: \u001B[31m
+//
+//        Màu xanh lá cây: \u001B[32m
+//
+//        Màu vàng: \u001B[33m
+//
+//        Màu xanh da trời: \u001B[34m
+//
+//        Màu tím: \u001B[35m
+//
+//        Màu xanh dương: \u001B[36m
+//
+//        Màu trắng: \u001B[37m
+//
+//        Màu nền đen: \u001B[40m
+//
+//        Màu nền đỏ: \u001B[41m
+//
+//        Màu nền xanh lá cây: \u001B[42m
+//
+//        Màu nền vàng: \u001B[43m
+//
+//        Màu nền xanh da trời: \u001B[44m
+//
+//        Màu nền tím: \u001B[45m
+//
+//        Màu nền xanh dương: \u001B[46m
+//
+//        Màu nền trắng: \u001B[47m
+//
+//        Chữ đậm: \u001B[1m
+//
+//        Chữ nghiêng: \u001B[3m
+//
+//        Chữ gạch chân: \u001B[4m
+//
+//        Chữ gạch ngang: \u001B[9m
+//
+//        Trở lại màu chữ mặc định: \u001B[0m
+

@@ -12,7 +12,7 @@ import java.util.List;
 public class RegisterAccount {
     private static List<User> accountClientList = new ArrayList<>();
     private static List<User> accountShopList = new ArrayList<>();
-    public static final String REGEX = "([a-z]){5,13}(\\d){2,5}";
+    public final String REGEX = "([a-z]){5,13}(\\d){2,5}";
     public RegisterAccount(){
 
     }

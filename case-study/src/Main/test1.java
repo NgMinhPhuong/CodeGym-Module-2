@@ -1,10 +1,8 @@
 package Main;
 
+
 import java.io.Serializable;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
+
 
 public class test1 implements Serializable {
     int data = 2;
@@ -19,13 +17,13 @@ public class test1 implements Serializable {
         return name + "  " + data;
     }
     public static void main(String[] args) {
-        System.out.println("cc");
-        LocalDateTime a = LocalDateTime.now();
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
-        LocalDateTime after = a.plusHours(6);
-        System.out.println(a.format(formatter));
-        System.out.println(after);
+        int x = 50;   // Tọa độ x
+        int y = 5;    // Tọa độ y
 
-/////// Làm mở tài khoản khi hết thời gian khoá
+        // Sử dụng escape sequence để di chuyển con trỏ đến tọa độ x, y
+        System.out.print("\033[" + y + ";" + x + "H");
+
+        // Tiếp tục với các dòng lệnh khác
+        System.out.println("Hello, world!");
     }
 }
