@@ -39,7 +39,7 @@ public class DisplayShop {
                     DisPlay.getInstance().displayRemoveFromBasket(shop);
                     break;
                 case 3:
-                    DisPlay.getInstance().showBasket(shop);
+                    DisPlay.getInstance().displayShowBasket(shop);
                     break;
                 case 4:
                    DisPlay.getInstance().displayAddProduct(shop);
@@ -48,7 +48,7 @@ public class DisplayShop {
                     DisPlay.getInstance().displayRemoveProduct(shop);
                     break;
                 case 6:
-                    DisPlay.getInstance().showMyProduct(shop);
+                    DisPlay.getInstance().displayShowMyProduct(shop);
                     break;
                 case 7:
                     DisPlay.getInstance().displaySetAddMonneyMethod(shop);

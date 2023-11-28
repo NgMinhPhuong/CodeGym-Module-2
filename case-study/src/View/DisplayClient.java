@@ -40,7 +40,7 @@ public class DisplayClient {
                         DisPlay.getInstance().displayRemoveFromBasket(client);
                         break;
                     case 3:
-                        DisPlay.getInstance().showBasket(client);
+                        DisPlay.getInstance().displayShowBasket(client);
                         break;
                     case 4:
                         DisPlay.getInstance().displaySetAddMonneyMethod(client);

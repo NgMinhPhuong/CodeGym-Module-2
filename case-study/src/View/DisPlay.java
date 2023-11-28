@@ -1,6 +1,10 @@
 package View;
 
+import Controller.AddMonneyController;
 import Controller.BasketController;
+import Controller.CommunicateController;
+import Controller.PaymentController;
+import Controller.VoteProductController;
 import Controller.Register_LoginController;
 import Controller.ShopController;
 import Controller.UserController;
@@ -48,7 +52,7 @@ public class DisPlay {
         BasketController.getInstance().removeFromBasket(id, user, accountName);
     }
 
-    public void showBasket(User user) {
+    public void displayShowBasket(User user) {
         BasketService.getInstance().showBasket(user);
     }
 
@@ -56,21 +60,21 @@ public class DisPlay {
     public void displaySetAddMonneyMethod(User user){
         System.out.print("'Bank(100%)' or 'PhoneCard(80%)': ");
         String type = sc.nextLine();
-        UserController.getInstance().setAddMoneyMethod(type, user);
+        AddMonneyController.getInstance().setAddMoneyMethod(type, user);
     }
 
     public void displayAddMonney(User user){
         System.out.print("The monney want to add: ");
         double monney = sc.nextDouble();
         sc.nextLine();
-        UserController.getInstance().addMonneyToAccount(monney, user);
+        AddMonneyController.getInstance().addMonneyToAccount(monney, user);
     }
 
     //-------------------------------------------------
     public void displaySetPaymentMethod(User user){
         System.out.print("'Bank' or 'Account': ");
         String type = sc.nextLine();
-        UserController.getInstance().setPaymentMethod(type, user);
+        PaymentController.getInstance().setPaymentMethod(type, user);
     }
 
     public void displayBuyProduct(User user){
@@ -85,14 +89,14 @@ public class DisPlay {
         System.out.println("If you enter it wrongly or let it Empty. Default is not Use the Voucher");
         int idVoucher = sc.nextInt();
         sc.nextLine();
-        UserController.getInstance().pay(id, amount, accountName, user, idVoucher);
+        PaymentController.getInstance().pay(id, amount, accountName, user, idVoucher);
     }
 
     //-------------------------------------------------
     public void displayConnectAccount(User user){
         System.out.print("You want to connect to Account: ");
         String accountName = sc.nextLine();
-        user.connectToAnUser(accountName);
+        CommunicateController.getInstance().connectToAnUser(user, accountName);
     }
 
 
@@ -101,14 +105,14 @@ public class DisPlay {
         String accountName = sc.nextLine();
         System.out.print("Conten is: ");
         String content = sc.nextLine();
-        user.sendMessageTo(accountName, content);
+        CommunicateController.getInstance().sendMessageTo(user, accountName, content);
     }
 
 
     public void displayReadMail(User user){
         System.out.print("Read MailBox With Account: ");
         String accountName = sc.nextLine();
-        user.readMail(accountName);
+        CommunicateController.getInstance().readMail(user, accountName);
     }
 
     //--------------------------------------------------
@@ -133,7 +137,7 @@ public class DisPlay {
         ShopController.getInstance().removeProductFromStore(id, shop);
     }
 
-    public void showMyProduct(Shop shop){
+    public void displayShowMyProduct(Shop shop){
         ShopService.getInstance().showProductList(shop);
     }
     //----------------------------------------------------
@@ -187,7 +191,7 @@ public class DisPlay {
         sc.nextLine();
         System.out.print("Comment: ");
         String comment = sc.nextLine();
-        UserController.getInstance().voteProduct(accountName, id, star, comment, user);
+        VoteProductController.getInstance().voteProduct(accountName, id, star, comment, user);
     }
 
     public void displayShowVoteProduct(){
@@ -196,7 +200,7 @@ public class DisPlay {
         sc.nextLine();
         System.out.print("At Shop with AccountName: ");
         String accountName = sc.nextLine();
-        UserController.getInstance().showVoteProduct(accountName, id);
+        VoteProductController.getInstance().showVoteProduct(accountName, id);
     }
 
     public void displayRevenue(Shop shop){
@@ -211,7 +215,7 @@ public class DisPlay {
     public void displayFindProduct(){
         System.out.print("The name of Product: ");
         String productName = sc.nextLine();
-        UserService.getInstance().findProduct(productName);
+        UserController.getInstance().findProduct(productName);
     }
 
     public void displayUpdateInformation(User user){
