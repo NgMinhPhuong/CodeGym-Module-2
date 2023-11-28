@@ -1,11 +1,11 @@
 package service;
 
+import Model.PayByAccount;
 import Model.Product;
 import Model.RegisterAccount;
 import Model.Shop;
 import Model.User;
-import final_REGEX.Const;
-import untils.DataFile;
+import Model.Voucher;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -153,45 +153,8 @@ public class UserService {
         }
     }
 
-    public void addIntoBasket(User userAdd, Product product, String accountName) {
-        if (userAdd.getBasket().containsKey(accountName)) {
-            List<Product> tmp = userAdd.getBasket().get(accountName);
-            tmp.add(product);
-        } else {
-            List<Product> tmp = new ArrayList<>();
-            tmp.add(product);
-            userAdd.getBasket().put(accountName, tmp);
-        }
 
-    }
-
-
-    public void removeFromBasket(User userRemove, int id, String accountName) {
-        List<Product> tmp = userRemove.getBasket().get(accountName);
-        for (Product product : tmp) {
-            if (product.getId() == id) {
-                userRemove.getBasket().get(accountName).remove(product);
-                if (tmp.isEmpty()) {
-                    userRemove.getBasket().remove(accountName);
-                }
-                return;
-            }
-        }
-    }
-    public void showBasket(User userShow){
-        if(userShow.getBasket().isEmpty()){
-            System.out.println("Basket is empty");
-            return;
-        }
-        for(Map.Entry<String, List<Product>> map : userShow.getBasket().entrySet()){
-            System.out.println(map.getKey() + ": ");
-            for (Product product : map.getValue()){
-                System.out.println("         " + product);
-            }
-            System.out.println();
-        }
-    }
-    public void pay(Product product, int amount, User userBuy, User userSell) {
+    public void pay(Product product, int amount, User userBuy, User userSell, int idVoucher) {
         userBuy.getPaymentMethod().pay(product, amount, userBuy, userSell);
         int id = product.getId();
         if(product.getAmount() == 0){
@@ -212,18 +175,14 @@ public class UserService {
 
         userBuy.getTransactionHistory().add(buy);
         userSell.getTransactionHistory().add(sell);
-        List<Product> tmp = userBuy.getBasket().get(userSell.getAccountName());
-        if (tmp == null) {
-            System.out.println("Payment success");
-            return;
-        }
+        List<Product> tmp = userBuy.getBasket().getList().get(userSell.getAccountName());
         for(Product x : tmp){
             if(x.getId() == id){
                 x.setAmount(x.getAmount() - amount);
                 if(x.getAmount() == 0){
                     tmp.remove(x);
                     if(tmp.isEmpty()) {
-                        userBuy.getBasket().remove(userSell.getAccountName());
+                        userBuy.getBasket().getList().remove(userSell.getAccountName());
                     }
                     break;
                 }
@@ -231,7 +190,20 @@ public class UserService {
             }
         }
         System.out.println("Payment success");
+        if(product.getPrice() * amount > 100000) userBuy.getVoucherList().add(new Voucher(product.getPrice() * amount * 0.05));
+        for(Voucher voucher : userBuy.getVoucherList()){
+            if(voucher.getId() == idVoucher){
+                if(userBuy.getPaymentMethod() instanceof PayByAccount){
+                    userBuy.setAccount(userBuy.getAccount() + voucher.getPrice());
+                } else {
+                    userBuy.setBankCard(userBuy.getBankCard() + voucher.getPrice());
+                }
+                userBuy.getVoucherList().remove(voucher);
+                return;
+            }
+        }
     }
+
 
     public void addMonneyToAccount(User user, double monney){
                 user.getAddMoneyMethod().add(user, monney);
@@ -288,5 +260,10 @@ public class UserService {
         }
     }
 
+    public void showMyVoucher(User user){
+        for(Voucher voucher : user.getVoucherList()){
+            System.out.println(voucher);
+        }
+    }
 
 }

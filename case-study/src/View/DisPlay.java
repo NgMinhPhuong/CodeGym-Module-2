@@ -1,11 +1,12 @@
 package View;
 
+import Controller.BasketController;
 import Controller.Register_LoginController;
 import Controller.ShopController;
 import Controller.UserController;
 import Model.Shop;
 import Model.User;
-import final_REGEX.Const;
+import service.BasketService;
 import service.ShopService;
 import service.UserService;
 
@@ -35,7 +36,7 @@ public class DisPlay {
         sc.nextLine();
         System.out.print("Product of Shop with AccountName: ");
         String accountName = sc.nextLine();
-        UserController.getInstance().addIntoBasket(id, user,accountName);
+        BasketController.getInstance().addIntoBasket(id, user,accountName);
     }
 
     public void displayRemoveFromBasket(User user){
@@ -44,11 +45,11 @@ public class DisPlay {
         sc.nextLine();
         System.out.print("Remove from Shop with Account Name: ");
         String accountName = sc.nextLine();
-        UserController.getInstance().removeFromBasket(id, user, accountName);
+        BasketController.getInstance().removeFromBasket(id, user, accountName);
     }
 
     public void showBasket(User user) {
-        UserService.getInstance().showBasket(user);
+        BasketService.getInstance().showBasket(user);
     }
 
     //-------------------------------------------------
@@ -80,7 +81,11 @@ public class DisPlay {
         sc.nextLine();
         System.out.print("Buy at the Shop has Id: ");
         String accountName = sc.nextLine();
-        UserController.getInstance().pay(id, amount, accountName, user);
+        System.out.println("Enter ID voucher that you want to use: ");
+        System.out.println("If you enter it wrongly or let it Empty. Default is not Use the Voucher");
+        int idVoucher = sc.nextInt();
+        sc.nextLine();
+        UserController.getInstance().pay(id, amount, accountName, user, idVoucher);
     }
 
     //-------------------------------------------------
@@ -227,6 +232,9 @@ public class DisPlay {
         UserController.getInstance().changePassword(oldPassword, newPassword, againNewPassword, user);
     }
 
+    public void displayShowMyVoucher(User user){
+        UserController.getInstance().showMyVoucher(user);
+    }
     public void flowText(String name){
         String redColor = "\u001B[31m";
         String greenColor = "\u001B[32m";

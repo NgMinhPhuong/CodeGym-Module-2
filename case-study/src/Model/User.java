@@ -19,7 +19,7 @@ public abstract class User implements Serializable {
     private AddMoneyMethod addMoneyMethod;
     private double account = 0;
     private double bankCard = 1000000;
-    private Map<String, List<Product>> basket = new HashMap<>();
+    Basket basket;
 
     private List<String> transactionHistory = new ArrayList<>();
 
@@ -29,6 +29,7 @@ public abstract class User implements Serializable {
 
     private String phoneNumber;
 
+    private List<Voucher> voucherList = new ArrayList<>();
     //------------------------------------------------------
     public User(String userName, String accountName, String password) {
         this.userName = userName;
@@ -64,10 +65,9 @@ public abstract class User implements Serializable {
         return bankCard;
     }
 
-    public Map<String, List<Product>> getBasket() {
+    public Basket getBasket() {
         return basket;
     }
-
 
     public List<String> getTransactionHistory() {
         return transactionHistory;
@@ -83,6 +83,10 @@ public abstract class User implements Serializable {
 
     public String getPhoneNumber() {
         return phoneNumber;
+    }
+
+    public List<Voucher> getVoucherList() {
+        return voucherList;
     }
 
     //------------------------------------------
@@ -116,10 +120,9 @@ public abstract class User implements Serializable {
         this.bankCard = bankCard;
     }
 
-    public void setBasket(Map<String, List<Product>> basket) {
+    public void setBasket(Basket basket) {
         this.basket = basket;
     }
-
 
     public void setTransactionHistory(List<String> transactionHistory) {
         this.transactionHistory = transactionHistory;
@@ -135,6 +138,10 @@ public abstract class User implements Serializable {
 
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
+    }
+
+    public void setVoucherList(List<Voucher> voucherList) {
+        this.voucherList = voucherList;
     }
 
     //----------------------------------------------------------------------------------------------

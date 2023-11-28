@@ -10,6 +10,7 @@ public class Product implements Serializable, Cloneable {
     private int amount;
     private  double price;
     String description;
+    String basketID;
     public Product(Product another){
         this.id = another.id;
         this.name = another.name;

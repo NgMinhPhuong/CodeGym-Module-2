@@ -2,6 +2,7 @@ package Main;
 
 
 import java.io.Serializable;
+import java.util.Scanner;
 
 
 public class test1 implements Serializable {
@@ -17,13 +18,7 @@ public class test1 implements Serializable {
         return name + "  " + data;
     }
     public static void main(String[] args) {
-        int x = 50;   // Tọa độ x
-        int y = 5;    // Tọa độ y
+        int a = new Scanner(System.in).nextInt();
 
-        // Sử dụng escape sequence để di chuyển con trỏ đến tọa độ x, y
-        System.out.print("\033[" + y + ";" + x + "H");
-
-        // Tiếp tục với các dòng lệnh khác
-        System.out.println("Hello, world!");
     }
 }

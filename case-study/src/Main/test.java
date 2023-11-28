@@ -9,6 +9,8 @@ import View.DisplayClient;
 import View.DisplayLogin_Register;
 import View.View;
 
+import java.util.Map;
+
 public class test {
     public static void main(String[] args) {
         View.getInstance().display();

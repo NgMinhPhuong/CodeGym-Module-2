@@ -87,6 +87,9 @@ public class DisplayClient {
                     case 18:
                         DisPlay.getInstance().displayChangePassword(client);
                         break;
+                    case 19:
+                        DisPlay.getInstance().displayShowMyVoucher(client);
+                        break;
                 }
                 System.out.println("------------------------------------------------------------");
             }

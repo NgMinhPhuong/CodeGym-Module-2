@@ -98,6 +98,8 @@ public class DisplayShop {
                 case 22:
                     DisPlay.getInstance().displayChangePassword(shop);
                     break;
+                case 23:
+                    DisPlay.getInstance().displayShowMyVoucher(shop);
             }
             System.out.println("------------------------------------------------------------");
         }

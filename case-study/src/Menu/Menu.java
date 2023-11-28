@@ -37,6 +37,7 @@ public class Menu {
         System.out.println("16. Show Transaction History");
         System.out.println("17. Update Personal Information");
         System.out.println("18. Change Password");
+        System.out.println("19. Show My Voucher");
         System.out.println("0. Log out");
         System.out.print("Enter your choose: ");
     }
@@ -68,6 +69,7 @@ public class Menu {
         System.out.println("20. Show Transaction History");
         System.out.println("21. Update Personal Information");
         System.out.println("22. Change Password");
+        System.out.println("23. Show My Voucher");
         System.out.println("0. Log out");
         System.out.print("Enter your choose: ");
     }

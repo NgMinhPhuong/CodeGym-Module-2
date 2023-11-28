@@ -2,7 +2,9 @@ package Controller;
 
 import Model.AddByBank;
 import Model.AddByPhoneCard;
+import Model.Voucher;
 import final_REGEX.Const;
+import service.BasketService;
 import service.ShopService;
 import service.UserService;
 import untils.DataFile;
@@ -34,62 +36,7 @@ public class UserController {
 
     //-----------------------------------------------------------
 
-    public void addIntoBasket(int id, User userAdd, String accountName) {
-        User userSell = null;
-        for (User user : RegisterAccount.getAccountShopList()) {
-            if (user.getAccountName().equals(accountName)) {
-                userSell = user;
-                break;
-            }
-        }
 
-        if (userSell == null) {
-            System.out.println("This store is not available");
-            return;
-        }
-        for (Product product : ((Shop) userSell).getMyProductList()) {
-            if (id == product.getId()) {
-                product = new Product(product);
-                UserService.getInstance().addIntoBasket(userAdd ,product, accountName);
-                System.out.println("Add successfully");
-                DataFile.getInstance().writeClient();
-                DataFile.getInstance().writeShop();
-                return;
-            }
-        }
-        System.out.println("Id is not exists");
-
-    }
-
-    //------------------------------------------------------------------
-
-    public void removeFromBasket(int id, User userRemove, String accountName) {
-        User userSell = null;
-        for (User user : RegisterAccount.getAccountShopList()) {
-            if (user.getAccountName().equals(accountName)) {
-                userSell = user;
-                break;
-            }
-        }
-
-        if (userSell == null) {
-            System.out.println("This store is not available");
-            return;
-        }
-
-        for (Map.Entry<String, List<Product>> map : userRemove.getBasket().entrySet()){
-            for(Product product : map.getValue()){
-                if(product.getId() == id){
-                    UserService.getInstance().removeFromBasket(userRemove, id, accountName);
-                    System.out.println("Remove from your Basket successfully");
-                    DataFile.getInstance().writeClient();
-                    DataFile.getInstance().writeShop();
-                    return;
-                }
-            }
-        }
-        System.out.println("There is no this Id in your Basket");
-    }
 
     //---------------------------------------------------------------------------
 
@@ -113,7 +60,7 @@ public class UserController {
     }
 
     //-----------------------------------------------------------
-    public void pay(int id, int amount, String accountName, User userBuy) {
+    public void pay(int id, int amount, String accountName, User userBuy, int idVoucher) {
         if (userBuy.getPaymentMethod() == null) {
             System.out.println("Chose a PaymentMethod please");
             return;
@@ -148,7 +95,8 @@ public class UserController {
             System.out.println("We only have " + product.getAmount() + " of them");
             return;
         }
-        UserService.getInstance().pay(product, amount, userBuy, userSell);
+
+        UserService.getInstance().pay(product, amount, userBuy, userSell, idVoucher);
         DataFile.getInstance().writeClient();
         DataFile.getInstance().writeShop();
     }
@@ -271,5 +219,7 @@ public class UserController {
         DataFile.getInstance().writeShop();
     }
 
-
+    public void showMyVoucher(User user){
+        UserService.getInstance().showMyVoucher(user);
+    }
 }
