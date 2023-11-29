@@ -3,9 +3,11 @@ package View;
 import Controller.AddMonneyController;
 import Controller.BasketController;
 import Controller.CommunicateController;
+import Controller.LoginController;
 import Controller.PaymentController;
+import Controller.PerSonalInformationController;
 import Controller.VoteProductController;
-import Controller.Register_LoginController;
+import Controller.RegisterController;
 import Controller.ShopController;
 import Controller.UserController;
 import Model.Shop;
@@ -35,8 +37,16 @@ public class DisPlay {
 
 
     public void displayAddToBasket(User user){
-        System.out.print("Id want to Add Basket: ");
-        int id = sc.nextInt();
+        int id;
+        while(true) {
+            try {
+                System.out.print("Id want to Add Basket: ");
+                id = sc.nextInt();
+                break;
+            } catch (Exception e) {
+                sc.nextLine();
+            }
+        }
         sc.nextLine();
         System.out.print("Product of Shop with AccountName: ");
         String accountName = sc.nextLine();
@@ -44,8 +54,16 @@ public class DisPlay {
     }
 
     public void displayRemoveFromBasket(User user){
-        System.out.print("Id want to remove from Basket: ");
-        int id = sc.nextInt();
+        int id;
+        while(true) {
+            try {
+                System.out.print("Id want to remove from Basket: ");
+                id = sc.nextInt();
+                break;
+            } catch (Exception e) {
+                sc.nextLine();
+            }
+        }
         sc.nextLine();
         System.out.print("Remove from Shop with Account Name: ");
         String accountName = sc.nextLine();
@@ -64,8 +82,16 @@ public class DisPlay {
     }
 
     public void displayAddMonney(User user){
-        System.out.print("The monney want to add: ");
-        double monney = sc.nextDouble();
+        double monney;
+        while(true) {
+            try {
+                System.out.print("The monney want to add: ");
+                monney = sc.nextDouble();
+                break;
+            } catch (Exception e) {
+                sc.nextLine();
+            }
+        }
         sc.nextLine();
         AddMonneyController.getInstance().addMonneyToAccount(monney, user);
     }
@@ -78,16 +104,39 @@ public class DisPlay {
     }
 
     public void displayBuyProduct(User user){
-        System.out.print("Product's Id you want to buy: ");
-        int id = sc.nextInt();
-        System.out.print("Quanlity to Buy: ");
-        int amount = sc.nextInt();
+        int id, amount, idVoucher;
+        while(true) {
+            try {
+                System.out.print("Product's Id you want to buy: ");
+                id = sc.nextInt();
+                break;
+            } catch (Exception e) {
+                sc.nextLine();
+            }
+        }
+
+        while(true) {
+            try {
+                System.out.print("Quanlity to Buy: ");
+                amount = sc.nextInt();
+                break;
+            } catch (Exception e) {
+                sc.nextLine();
+            }
+        }
         sc.nextLine();
         System.out.print("Buy at the Shop has Id: ");
         String accountName = sc.nextLine();
-        System.out.println("Enter ID voucher that you want to use: ");
-        System.out.println("If you enter it wrongly or let it Empty. Default is not Use the Voucher");
-        int idVoucher = sc.nextInt();
+        while(true) {
+            try {
+                System.out.println("Enter ID voucher that you want to use: ");
+                System.out.println("If you enter it wrongly or It is not exists. Default is not Use the Voucher");
+                idVoucher = sc.nextInt();
+                break;
+            } catch (Exception e) {
+                sc.nextLine();
+            }
+        }
         sc.nextLine();
         PaymentController.getInstance().pay(id, amount, accountName, user, idVoucher);
     }
@@ -120,10 +169,27 @@ public class DisPlay {
     public void displayAddProduct(Shop shop){
         System.out.print("Product's Name: ");
         String name = sc.nextLine();
-        System.out.print("Product's Price: ");
-        double price = sc.nextDouble();
-        System.out.print("The Number of Products: ");
-        int amount = sc.nextInt();
+        double price;
+        int amount;
+        while(true) {
+            try {
+                System.out.print("Product's Price: ");
+                price = sc.nextDouble();
+                break;
+            } catch (Exception e) {
+                sc.nextLine();
+            }
+        }
+
+        while(true) {
+            try {
+                System.out.print("The Number of Products: ");
+                amount = sc.nextInt();
+                break;
+            } catch (Exception e) {
+                sc.nextLine();
+            }
+        }
         sc.nextLine();
         System.out.print("Product's Description: ");
         String description = sc.nextLine();
@@ -131,8 +197,16 @@ public class DisPlay {
     }
 
     public void displayRemoveProduct(Shop shop){
-        System.out.print("Product's Id want to Remove: ");
-        int id = sc.nextInt();
+        int id;
+        while(true) {
+            try {
+                System.out.print("Product's Id want to Remove: ");
+                id = sc.nextInt();
+                break;
+            } catch (Exception e) {
+                sc.nextLine();
+            }
+        }
         sc.nextLine();
         ShopController.getInstance().removeProductFromStore(id, shop);
     }
@@ -150,7 +224,7 @@ public class DisPlay {
         String userName = sc.nextLine();
         System.out.print("Type('Shop' or 'Client'): ");
         String type = sc.nextLine();
-        Register_LoginController.getInstance().resigter(userName, accountName, password, type);
+        RegisterController.getInstance().resigter(userName, accountName, password, type);
         System.out.println("------------------------------------------------------------");
     }
 
@@ -159,7 +233,7 @@ public class DisPlay {
         String accountName = sc.nextLine();
         System.out.print("Enter your password: ");
         String password = sc.nextLine();
-        User user = Register_LoginController.getInstance().login(accountName, password);
+        User user = LoginController.getInstance().login(accountName, password);
         System.out.println("------------------------------------------------------------");
         return user;
     }
@@ -181,13 +255,29 @@ public class DisPlay {
     //---------------------------------------------------------
 
     public void displayVoteProduct(User user){
-        System.out.print("Product's ID that you want to vote: ");
-        int id = sc.nextInt();
+        int id;
+        while(true) {
+            try {
+                System.out.print("Product's ID that you want to vote: ");
+                id = sc.nextInt();
+                break;
+            } catch (Exception e) {
+                sc.nextLine();
+            }
+        }
         sc.nextLine();
         System.out.print("At Shop with AccountName: ");
         String accountName = sc.nextLine();
-        System.out.print("The Numbers of star: ");
-        int star = sc.nextInt();
+        int star;
+        while(true) {
+            try {
+                System.out.print("The Numbers of star: ");
+                star = sc.nextInt();
+                break;
+            } catch (Exception e) {
+                sc.nextLine();
+            }
+        }
         sc.nextLine();
         System.out.print("Comment: ");
         String comment = sc.nextLine();
@@ -195,8 +285,16 @@ public class DisPlay {
     }
 
     public void displayShowVoteProduct(){
-        System.out.print("Enter product's Id that you want to see: ");
-        int id = sc.nextInt();
+        int id;
+        while(true) {
+            try {
+                System.out.print("Enter product's Id that you want to see: ");
+                id = sc.nextInt();
+                break;
+            } catch (Exception e) {
+                sc.nextLine();
+            }
+        }
         sc.nextLine();
         System.out.print("At Shop with AccountName: ");
         String accountName = sc.nextLine();
@@ -223,7 +321,7 @@ public class DisPlay {
         String email = sc.nextLine();
         System.out.print("Phone Number: ");
         String phoneNumber = sc.nextLine();
-        UserController.getInstance().updateInformation(email, phoneNumber, user);
+        PerSonalInformationController.getInstance().updateInformation(email, phoneNumber, user);
     }
 
     public void displayChangePassword(User user){
@@ -233,28 +331,11 @@ public class DisPlay {
         String newPassword = sc.nextLine();
         System.out.print("Enter New Password again: ");
         String againNewPassword = sc.nextLine();
-        UserController.getInstance().changePassword(oldPassword, newPassword, againNewPassword, user);
+        PerSonalInformationController.getInstance().changePassword(oldPassword, newPassword, againNewPassword, user);
     }
 
     public void displayShowMyVoucher(User user){
         UserController.getInstance().showMyVoucher(user);
-    }
-    public void flowText(String name){
-        String redColor = "\u001B[31m";
-        String greenColor = "\u001B[32m";
-        String defaultColor = "\u001B[0m";
-        String yellowColor = "\\u001B[43m";
-        String blank = " ";
-        int cnt = 0;
-        while(true){
-            String s = " ";
-            for(int i = 0; i < 143 - name.length(); i++){
-                s += " ";
-            }
-            s += name;
-            System.out.println(yellowColor + s);
-            cnt++;
-        }
     }
 }
 

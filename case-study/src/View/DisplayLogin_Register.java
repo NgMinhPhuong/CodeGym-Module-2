@@ -1,9 +1,8 @@
 package View;
 
-import Controller.Register_LoginController;
 import Menu.Menu;
 import Model.User;
-import untils.DataFile;
+import untils.DataAccount;
 
 import java.util.Scanner;
 
@@ -12,8 +11,8 @@ public class DisplayLogin_Register {
         Scanner sc = new Scanner(System.in);
         int choose = -1;
         while(choose != 3) {
-            DataFile.getInstance().readClient();
-            DataFile.getInstance().readShop();
+            DataAccount.getInstance().readClient();
+            DataAccount.getInstance().readShop();
             Menu.getInstance().displayMenuRegister_Login();
             try{
                 choose = sc.nextInt();

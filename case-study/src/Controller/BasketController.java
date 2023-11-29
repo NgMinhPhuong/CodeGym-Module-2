@@ -5,7 +5,8 @@ import Model.RegisterAccount;
 import Model.Shop;
 import Model.User;
 import service.BasketService;
-import untils.DataFile;
+import untils.DataAccount;
+import untils.DataProduct;
 
 import java.util.List;
 import java.util.Map;
@@ -41,8 +42,9 @@ public class BasketController {
                 product = new Product(product);
                 BasketService.getInstance().addIntoBasket(userAdd ,product, accountName);
                 System.out.println("Add successfully");
-                DataFile.getInstance().writeClient();
-                DataFile.getInstance().writeShop();
+                DataAccount.getInstance().writeClient();
+                DataAccount.getInstance().writeShop();
+                DataProduct.getInstance().writeProduct();
                 return;
             }
         }
@@ -71,8 +73,9 @@ public class BasketController {
                 if(product.getId() == id){
                     BasketService.getInstance().removeFromBasket(userRemove, id, accountName);
                     System.out.println("Remove from your Basket successfully");
-                    DataFile.getInstance().writeClient();
-                    DataFile.getInstance().writeShop();
+                    DataAccount.getInstance().writeClient();
+                    DataAccount.getInstance().writeShop();
+                    DataProduct.getInstance().writeProduct();
                     return;
                 }
             }

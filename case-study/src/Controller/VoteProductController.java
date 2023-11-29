@@ -5,7 +5,7 @@ import Model.User;
 import service.VoteProductService;
 import service.ShopService;
 import service.UserService;
-import untils.DataFile;
+import untils.DataVote;
 
 public class VoteProductController {
     private static VoteProductController instance;
@@ -34,7 +34,7 @@ public class VoteProductController {
         }
         String path = "C:\\Users\\DELL\\Desktop\\Java_CODEGYM-Module2\\case-study\\src\\my_File\\vote_product\\"
                 + accountName + "_" + id + ".csv";
-        DataFile.getInstance().writeVote(path, star, comment, userComment);
+        DataVote.getInstance().writeVote(path, star, comment, userComment);
         System.out.println("Comment Successfully");
     }
 

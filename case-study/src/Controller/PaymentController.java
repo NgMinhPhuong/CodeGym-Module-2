@@ -7,8 +7,8 @@ import Model.RegisterAccount;
 import Model.Shop;
 import Model.User;
 import service.PaymentService;
-import service.UserService;
-import untils.DataFile;
+import untils.DataAccount;
+import untils.DataProduct;
 
 public class PaymentController {
     private static PaymentController instance;
@@ -26,14 +26,17 @@ public class PaymentController {
         if (type.equals("Bank")) {
             user.setPaymentMethod(new PayByCard());
             System.out.println("Selected !");
-            DataFile.getInstance().writeShop();
-            DataFile.getInstance().writeClient();
+            DataAccount.getInstance().writeShop();
+            DataAccount.getInstance().writeClient();
+            DataProduct.getInstance().writeProduct();
+
             return;
         } else if (type.equals("Account")) {
             user.setPaymentMethod(new PayByAccount());
             System.out.println("Selected !");
-            DataFile.getInstance().writeShop();
-            DataFile.getInstance().writeClient();
+            DataAccount.getInstance().writeShop();
+            DataAccount.getInstance().writeClient();
+            DataProduct.getInstance().writeProduct();
             return;
         }
         System.out.println("Type is Wrong. Type must be ('Bank' or 'Account')");
@@ -76,7 +79,9 @@ public class PaymentController {
         }
 
         PaymentService.getInstance().pay(product, amount, userBuy, userSell, idVoucher);
-        DataFile.getInstance().writeClient();
-        DataFile.getInstance().writeShop();
+        DataAccount.getInstance().writeClient();
+        DataAccount.getInstance().writeShop();
+        DataProduct.getInstance().writeProduct();
+
     }
 }

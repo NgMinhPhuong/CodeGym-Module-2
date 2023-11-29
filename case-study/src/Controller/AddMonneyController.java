@@ -4,7 +4,8 @@ import Model.AddByBank;
 import Model.AddByPhoneCard;
 import Model.User;
 import service.AddMonneyService;
-import untils.DataFile;
+import untils.DataAccount;
+import untils.DataProduct;
 
 public class AddMonneyController {
     private static AddMonneyController instance;
@@ -22,14 +23,16 @@ public class AddMonneyController {
         if (type.equals("Bank")) {
             user.setAddMoneyMethod(new AddByBank());
             System.out.println("Selected !");
-            DataFile.getInstance().writeShop();
-            DataFile.getInstance().writeClient();
+            DataAccount.getInstance().writeShop();
+            DataAccount.getInstance().writeClient();
+            DataProduct.getInstance().writeProduct();
             return;
         } else if (type.equals("PhoneCard")) {
             user.setAddMoneyMethod(new AddByPhoneCard());
             System.out.println("Selected !");
-            DataFile.getInstance().writeShop();
-            DataFile.getInstance().writeClient();
+            DataAccount.getInstance().writeShop();
+            DataAccount.getInstance().writeClient();
+            DataProduct.getInstance().writeProduct();
             return;
         }
         System.out.println("Type is Wrong. Type must be ('Bank' or 'PhoneCard')");
@@ -48,7 +51,8 @@ public class AddMonneyController {
         }
         AddMonneyService.getInstance().addMonneyToAccount(user, monney);
         System.out.println("Add successfully");
-        DataFile.getInstance().writeShop();
-        DataFile.getInstance().writeClient();
+        DataAccount.getInstance().writeShop();
+        DataAccount.getInstance().writeClient();
+        DataProduct.getInstance().writeProduct();
     }
 }

@@ -1,6 +1,6 @@
 package service;
 
-import untils.DataFile;
+import untils.DataVote;
 
 import java.util.List;
 
@@ -19,7 +19,7 @@ public class VoteProductService {
 
     public void showVoteProduct(String path) {
         List<String> listComment;
-        listComment = DataFile.getInstance().readVote(path);
+        listComment = DataVote.getInstance().readVote(path);
         if (listComment == null) {
             System.out.println("There are no comments for this product yet");
             return;

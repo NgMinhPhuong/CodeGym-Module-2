@@ -27,22 +27,6 @@ public class UserService {
 
 
 
-    //-------------------------------------------
-
-
-    //-----------------------------------------------------------
-
-
-
-    //------------------------------------
-
-
-    //--------------------------------------
-
-
-
-
-
     //--------------------------------------------------
     public User checkUserExists(String accountName){
         for (User user : RegisterAccount.getAccountClientList()){
@@ -94,10 +78,6 @@ public class UserService {
         }
     }
 
-    public void showMyVoucher(User user){
-        for(Voucher voucher : user.getVoucherList()){
-            System.out.println(voucher);
-        }
-    }
+
 
 }

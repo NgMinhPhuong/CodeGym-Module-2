@@ -2,7 +2,7 @@ package View;
 
 import Menu.Menu;
 import Model.Client;
-import untils.DataFile;
+import untils.DataAccount;
 import Model.RegisterAccount;
 import Model.User;
 
@@ -16,8 +16,8 @@ public class DisplayClient {
             while(choose != 0)
             {
                 Client client = null;
-                DataFile.getInstance().readClient();
-                DataFile.getInstance().readShop();
+                DataAccount.getInstance().readClient();
+                DataAccount.getInstance().readShop();
                 for(User x : RegisterAccount.getAccountClientList()){
                     if(x.getAccountName().equals(accountNameOfuser)){
                         client = (Client) x;

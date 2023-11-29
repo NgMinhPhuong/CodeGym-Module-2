@@ -1,7 +1,7 @@
 package View;
 
 import Menu.Menu;
-import untils.DataFile;
+import untils.DataAccount;
 import Model.RegisterAccount;
 import Model.Shop;
 import Model.User;
@@ -15,8 +15,8 @@ public class DisplayShop {
         while(choose1 != 0)
         {
             Shop shop = null;
-            DataFile.getInstance().readShop();
-            DataFile.getInstance().readClient();
+            DataAccount.getInstance().readShop();
+            DataAccount.getInstance().readClient();
             for(User x : RegisterAccount.getAccountShopList()){
                 if(x.getAccountName().equals(accountNameOfuser)){
                     shop = (Shop) x;

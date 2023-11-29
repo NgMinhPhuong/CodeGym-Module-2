@@ -1,9 +1,10 @@
 package Controller;
 
 import service.ShopService;
-import untils.DataFile;
+import untils.DataAccount;
 import Model.Product;
 import Model.Shop;
+import untils.DataProduct;
 
 public class ShopController {
     private static ShopController instance;
@@ -20,8 +21,9 @@ public class ShopController {
 
     public void addProductIntoStore(String name, double price, int amount, String description, Shop shop){
         ShopService.getInstance().addProduct(shop, name, price, amount, description);
-        DataFile.getInstance().writeShop();
-        DataFile.getInstance().writeClient();
+        DataAccount.getInstance().writeShop();
+        DataAccount.getInstance().writeClient();
+        DataProduct.getInstance().writeProduct();
         System.out.println("Add Successfully");
     }
 
@@ -29,8 +31,9 @@ public class ShopController {
         for(Product product : shop.getMyProductList()){
             if(id == product.getId()){
                 ShopService.getInstance().removeProduct(shop, id);
-                DataFile.getInstance().writeShop();
-                DataFile.getInstance().writeClient();
+                DataAccount.getInstance().writeShop();
+                DataAccount.getInstance().writeClient();
+                DataProduct.getInstance().writeProduct();
                 System.out.println("Remove successfully");
                 return;
             }

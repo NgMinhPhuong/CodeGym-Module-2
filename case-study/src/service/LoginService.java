@@ -1,23 +1,22 @@
 package service;
 
 import Model.RegisterAccount;
-import Model.Shop;
 import Model.User;
-import untils.DataFile;
+import untils.DataBlackList;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
-public class Register_LoginService {
-    private static Register_LoginService instance;
-    private Register_LoginService(){
+public class LoginService {
+    private static LoginService instance;
+    private LoginService(){
 
     }
 
-    public static Register_LoginService getInstance() {
+    public static LoginService getInstance() {
         if(instance == null){
-            instance = new Register_LoginService();
+            instance = new LoginService();
         }
         return instance;
     }
@@ -30,12 +29,12 @@ public class Register_LoginService {
                 if(cnt == 3){
                     user.setCntBlock(0);
                     try{
-                        List<String[]> blockList = DataFile.getInstance().readBlockAccount();
+                        List<String[]> blockList = DataBlackList.getInstance().readBlockAccount();
                         LocalDateTime localDateTime = LocalDateTime.now();
                         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
                         String [] ss = {accountName, localDateTime.plusSeconds(30).format(formatter)};
                         blockList.add(ss);
-                        DataFile.getInstance().writeBlockAccount(blockList);
+                        DataBlackList.getInstance().writeBlockAccount(blockList);
                     } catch (Exception e){
                         e.printStackTrace();
                         //System.out.println("Please Close File. You are opening it");
@@ -57,12 +56,12 @@ public class Register_LoginService {
                 if(cnt == 3){
                     user.setCntBlock(0);
                     try{
-                        List<String[]> blockList = DataFile.getInstance().readBlockAccount();
+                        List<String[]> blockList = DataBlackList.getInstance().readBlockAccount();
                         LocalDateTime localDateTime = LocalDateTime.now();
                         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
                         String [] ss = {accountName,localDateTime.plusHours(12).format(formatter)};
                         blockList.add(ss);
-                        DataFile.getInstance().writeBlockAccount(blockList);
+                        DataBlackList.getInstance().writeBlockAccount(blockList);
                     } catch (Exception e){
                         e.printStackTrace();
                         //System.out.println("Please Close File. You are opening it");
@@ -81,17 +80,5 @@ public class Register_LoginService {
         }
         System.out.println("Account Name is not exists");
         return null;
-    }
-
-    //-------------------------------------------------------------------------
-
-    public void resigter(User user) {
-        User newUser = user;
-        if(newUser instanceof Shop) {
-            RegisterAccount.getAccountShopList().add(newUser);
-        }
-        else{
-            RegisterAccount.getAccountClientList().add(newUser);
-        }
     }
 }
