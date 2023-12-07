@@ -10,7 +10,7 @@ public class DisplayLogin_Register {
     public static User display(){
         Scanner sc = new Scanner(System.in);
         int choose = -1;
-        while(choose != 3) {
+        while(choose != 0) {
             DataAccount.getInstance().readClient();
             DataAccount.getInstance().readShop();
             Menu.getInstance().displayMenuRegister_Login();
@@ -31,6 +31,10 @@ public class DisplayLogin_Register {
                     User user = DisPlay.getInstance().displayLogin();
                     if(user == null) continue;
                     return user;
+                case 3:
+                    DisPlay.getInstance().displayForgotPassWord();
+                    System.out.println("-------------------------------------------------------------------------------");
+                    break;
             }
         }
         return null;

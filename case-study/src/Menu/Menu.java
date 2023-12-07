@@ -45,8 +45,8 @@ public class Menu {
 
     public void displayMenuShop(User user){
         String defaultColor = "\u001B[0m";
-        String yellowColor = "\\u001B[34m";
-        System.out.println("                                          " + yellowColor + "Welcome "  + user.getAccountName() + "(Client)" + defaultColor);
+        String yellowColor = "\u001B[34m";
+        System.out.println("                                          " + yellowColor + "Welcome "  + user.getAccountName() + "(Shop)" + defaultColor);
         System.out.println("1: Add a Product To Basket");
         System.out.println("2: Remove a Product To Basket");
         System.out.println("3: Show my Basket");
@@ -78,7 +78,8 @@ public class Menu {
     public void displayMenuRegister_Login(){
         System.out.println("1. Resigter an account");
         System.out.println("2. Login");
-        System.out.println("3. Exit");
+        System.out.println("3. Forgot Password");
+        System.out.println("0. Exit");
         System.out.print("Enter your choose: ");
     }
 }

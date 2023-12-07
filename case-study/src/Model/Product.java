@@ -1,8 +1,6 @@
 package Model;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 
 public class Product implements Serializable, Cloneable {
     private int id;
@@ -10,7 +8,6 @@ public class Product implements Serializable, Cloneable {
     private int amount;
     private  double price;
     String description;
-    String basketID;
     public Product(Product another){
         this.id = another.id;
         this.name = another.name;

@@ -59,11 +59,12 @@ public class CommunicateService {
                 for (int i = 0; i < str.length(); i++) {
                     s += str.charAt(i);
                     if (s.equals(user1.getUserName())) {
-                        System.out.print("                           ");
+                        System.out.print("                           " + "\u001B[31m");
                         break;
                     }
+                    System.out.print("\u001B[32m");
                 }
-                System.out.println(str);
+                System.out.println(str + "\u001B[0m");
             }
         } catch (IOException e) {
             throw new RuntimeException(e);

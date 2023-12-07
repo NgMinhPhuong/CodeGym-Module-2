@@ -23,12 +23,12 @@ public class PerSonalInformationController {
     public void updateInformation(String email, String phoneNumber, User user){
         Scanner sc = new Scanner(System.in);
 
-        while(email.matches(Const.getInstance().REGEX_EMAIL)){
+        while(!email.matches(Const.getInstance().REGEX_EMAIL)){
             System.out.print("Email: ");
             email = sc.nextLine();
         }
 
-        while (phoneNumber.matches(Const.getInstance().REGEX_PHONE_NUMBER)){
+        while (!phoneNumber.matches(Const.getInstance().REGEX_PHONE_NUMBER)){
             System.out.print("Phone Number: ");
             phoneNumber = sc.nextLine();
         }

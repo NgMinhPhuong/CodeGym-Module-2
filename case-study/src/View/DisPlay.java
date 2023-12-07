@@ -3,6 +3,7 @@ package View;
 import Controller.AddMonneyController;
 import Controller.BasketController;
 import Controller.CommunicateController;
+import Controller.ForgotPWController;
 import Controller.LoginController;
 import Controller.PaymentController;
 import Controller.PerSonalInformationController;
@@ -336,6 +337,16 @@ public class DisPlay {
 
     public void displayShowMyVoucher(User user){
         UserController.getInstance().showMyVoucher(user);
+    }
+
+    public void displayForgotPassWord(){
+        System.out.print("Enter your Account Name: ");
+        String accountName = sc.nextLine();
+        System.out.print("Enter your Email: ");
+        String email = sc.nextLine();
+        System.out.print("Enter New PassWord: ");
+        String newPW = sc.nextLine();
+        ForgotPWController.getInstance().createNewPW(accountName, newPW, email);
     }
 }
 
