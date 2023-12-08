@@ -39,10 +39,12 @@ public class LoginService {
                         e.printStackTrace();
                         //System.out.println("Please Close File. You are opening it");
                     }
-                    System.out.println("You entered it wrongly 3 time. Your account has been locked");
+                    System.out.println("\u001B[31m" + "Enter Wrongly Password" + "\u001B[0m");
+                    System.out.println("\u001B[31m" + "You entered it wrongly 3 time. Your account has been locked" + "\u001B[0m");
                     return null;
                 }
-                System.out.println("You entered it wrongly " + cnt + " time");
+                System.out.println("\u001B[31m" + "Enter Wrongly Password" + "\u001B[0m");
+                System.out.println("\u001B[31m" +"You entered it wrongly " + cnt + " time" + "\u001B[0m");
                 return null;
             }
             if ((user.getAccountName()).equals(accountName) && (user.getPassword()).equals(password)) {
@@ -66,12 +68,12 @@ public class LoginService {
                         e.printStackTrace();
                         //System.out.println("Please Close File. You are opening it");
                     }
-                    System.out.println("Enter Wrongly Password");
-                    System.out.println("You entered it wrongly 3 time. Your account has been locked");
+                    System.out.println("\u001B[31m" + "Enter Wrongly Password" + "\u001B[0m");
+                    System.out.println("\u001B[31m" + "You entered it wrongly 3 time. Your account has been locked" + "\u001B[0m");
                     return null;
                 }
-                System.out.println("Enter Wrongly Password");
-                System.out.println("You entered it wrongly " + cnt + " time");
+                System.out.println("\u001B[31m" + "Enter Wrongly Password" + "\u001B[0m");
+                System.out.println("\u001B[31m" + "You entered it wrongly " + cnt + " time" + "\u001B[0m");
                 return null;
             }
             if ((user.getAccountName()).equals(accountName) && (user.getPassword()).equals(password)) {

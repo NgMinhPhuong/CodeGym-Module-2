@@ -23,6 +23,10 @@ public class ForgotPWController {
             System.out.println("Account Name is not exists");
             return;
         }
+        if(user.getEmail() == null){
+            System.out.println("Email is wrong");
+            return;
+        }
         if(!user.getEmail().equals(email)){
             System.out.println("Email is wrong");
             return;
