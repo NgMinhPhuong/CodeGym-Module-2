@@ -17,6 +17,10 @@ public class VoucherService {
     }
 
     public void showMyVoucher(User user){
+        if (user.getVoucherList().isEmpty()){
+            System.out.println("There is no Voucher");
+            return;
+        }
         for(Voucher voucher : user.getVoucherList()){
             System.out.println(voucher);
         }

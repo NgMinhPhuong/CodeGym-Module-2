@@ -45,22 +45,24 @@ public class PaymentService {
 
         userBuy.getTransactionHistory().add(buy);
         userSell.getTransactionHistory().add(sell);
-        List<Product> tmp = userBuy.getBasket().getList().get(userSell.getAccountName());
-        for(Product x : tmp){
-            if(x.getId() == id){
-                x.setAmount(x.getAmount() - amount);
-                if(x.getAmount() == 0){
-                    tmp.remove(x);
-                    if(tmp.isEmpty()) {
-                        userBuy.getBasket().getList().remove(userSell.getAccountName());
+        if(userBuy.getBasket().getList().size() != 0) {
+            List<Product> tmp = userBuy.getBasket().getList().get(userSell.getAccountName());
+            for (Product x : tmp) {
+                if (x.getId() == id) {
+                    x.setAmount(x.getAmount() - amount);
+                    if (x.getAmount() == 0) {
+                        tmp.remove(x);
+                        if (tmp.isEmpty()) {
+                            userBuy.getBasket().getList().remove(userSell.getAccountName());
+                        }
+                        break;
                     }
                     break;
                 }
-                break;
             }
         }
-        System.out.println("Payment success");
-        if(product.getPrice() * amount > 100000) userBuy.getVoucherList().add(new Voucher(product.getPrice() * amount * 0.05));
+
+
         for(Voucher voucher : userBuy.getVoucherList()){
             if(voucher.getId() == idVoucher){
                 if(userBuy.getPaymentMethod() instanceof PayByAccount){
@@ -69,8 +71,16 @@ public class PaymentService {
                     userBuy.setBankCard(userBuy.getBankCard() + voucher.getPrice());
                 }
                 userBuy.getVoucherList().remove(voucher);
+                if(product.getPrice() * amount > 100000) {
+                    userBuy.getVoucherList().add(new Voucher(product.getPrice() * amount * 0.05));
+                    System.out.println("Received a Voucher");
+                }
                 return;
             }
+        }
+        if(product.getPrice() * amount > 100000) {
+            userBuy.getVoucherList().add(new Voucher(product.getPrice() * amount * 0.05));
+            System.out.println("Received a Voucher");
         }
     }
 }

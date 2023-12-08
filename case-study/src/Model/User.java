@@ -11,7 +11,7 @@ public abstract class User implements Serializable {
     private AddMoneyMethod addMoneyMethod;
     private double account = 0;
     private double bankCard = 1000000;
-    Basket basket;
+    Basket basket = new Basket();
 
     private List<String> transactionHistory = new ArrayList<>();
 

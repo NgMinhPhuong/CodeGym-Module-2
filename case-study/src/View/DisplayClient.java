@@ -69,7 +69,7 @@ public class DisplayClient {
                     case 12:
                         DisPlay.getInstance().checkMonneyInAccount(client);
                         break;
-                    case 123:
+                    case 13:
                         DisPlay.getInstance().checkMonneyInBankCard(client);
                         break;
                     case 14:

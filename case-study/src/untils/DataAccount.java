@@ -34,6 +34,7 @@ public class DataAccount {
             oos.writeObject(RegisterAccount.getAccountClientList());
             oos.close();
         } catch (Exception e) {
+            e.printStackTrace();
             System.out.println("Error Write File Client.csv");
         }
     }
@@ -46,6 +47,7 @@ public class DataAccount {
             oos.writeObject(RegisterAccount.getAccountShopList());
             oos.close();
         } catch (Exception e) {
+            e.printStackTrace();
             System.out.println("Error Write File Shop.csv");
         }
 
@@ -60,6 +62,7 @@ public class DataAccount {
                 RegisterAccount.setAccountClientList((List<User>) ois.readObject());
                 ois.close();
             } catch (IOException | ClassNotFoundException e) {
+                e.printStackTrace();
                 System.out.println("Error Read Client.csv");
             }
         }
@@ -75,6 +78,7 @@ public class DataAccount {
                 RegisterAccount.setAccountShopList((List<User>) ois.readObject());
                 ois.close();
             } catch (IOException | ClassNotFoundException e) {
+                e.printStackTrace();
                 System.out.println("Error Read Shop.csv");
             }
         }

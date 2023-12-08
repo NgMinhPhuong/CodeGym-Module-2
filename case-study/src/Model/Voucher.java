@@ -1,9 +1,11 @@
 package Model;
 
-public class Voucher {
+import java.io.Serializable;
+
+public class Voucher implements Serializable {
     private int id;
     private double price;
-    private int cnt = 1;
+    private static int cnt = 1;
 
     public Voucher(double price) {
         this.id = cnt++;

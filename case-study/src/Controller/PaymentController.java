@@ -78,6 +78,16 @@ public class PaymentController {
             return;
         }
 
+        if(userBuy.getAccount() < product.getPrice() * amount && userBuy.getPaymentMethod() instanceof PayByAccount){
+            System.out.println("Your Account is not Enough Monney");
+            return;
+        }
+
+        if(userBuy.getBankCard() < product.getPrice() * amount&& userBuy.getPaymentMethod() instanceof PayByCard){
+            System.out.println("Your BankCard is not Enough Monney");
+            return;
+        }
+
         PaymentService.getInstance().pay(product, amount, userBuy, userSell, idVoucher);
         DataAccount.getInstance().writeClient();
         DataAccount.getInstance().writeShop();

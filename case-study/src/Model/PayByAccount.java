@@ -11,10 +11,7 @@ public class PayByAccount implements PaymentMethod, Serializable {
 
     @Override
     public void pay(Product product, int amount, User userBuy,User userSell) {
-        if(userBuy.getAccount() < product.getPrice() * amount){
-            System.out.println("Your Account is not Enough Monney");
-            return;
-        }
+        System.out.println("Payment success");
         userBuy.setAccount(userBuy.getAccount() - product.getPrice()* amount);
         userSell.setAccount(userSell.getAccount() + product.getPrice()* amount);
         ((Shop) userSell).setRevenue(((Shop) userSell).getRevenue() + product.getPrice()* amount);
